@@ -3,7 +3,7 @@
 
 #include <random> 
 #include <ctime>
-#include "Human.h"
+class Human;
 
 using std::string;
 

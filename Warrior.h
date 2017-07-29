@@ -2,8 +2,8 @@
 #define __WARRIOR_H__
 
 #include <string>
-#include "Human.h"
-#include "Game.h"
+class Human;
+class Game;
 
 using std::string;
 

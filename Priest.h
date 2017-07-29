@@ -2,8 +2,8 @@
 #define __PRIEST_H__
 
 #include <string>
-#include "Mage.h"
-#include "Game.h"
+class Mage;
+class Game;
 
 using std::string;
 

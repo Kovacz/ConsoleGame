@@ -2,7 +2,7 @@
 #define __MAGE_H__
 
 #include <string>
-#include "Human.h"
+class Human;
 
 using std::string;
 

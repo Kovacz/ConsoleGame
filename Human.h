@@ -2,9 +2,9 @@
 #define __HUMAN_H__
 
 #include <string>
-#include "Weapon.h"
-#include "Game.h"
-#include "HitResult.h"
+enum class HitResult;
+class Game;
+class Weapon;
 
 using std::string;
 
