@@ -1,6 +1,11 @@
 #ifndef __WEAPON_H__
 #define __WEAPON_H__
 
+#include <string>
+#include "Human.h"
+
+using std::string;
+
 class Weapon
 {
 public:

@@ -1,6 +1,12 @@
 #ifndef __WARRIOR_H__
 #define __WARRIOR_H__
 
+#include <string>
+#include "Human.h"
+#include "Game.h"
+
+using std::string;
+
 class Warrior : public Human
 {
 public:

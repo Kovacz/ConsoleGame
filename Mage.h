@@ -1,6 +1,11 @@
 #ifndef __MAGE_H__
 #define __MAGE_H__
 
+#include <string>
+#include "Human.h"
+
+using std::string;
+
 class Mage : public Human
 {
 public:

@@ -1,6 +1,12 @@
 #ifndef __GAME_H__
 #define __GAME_H__
 
+#include <random> 
+#include <ctime>
+#include "Human.h"
+
+using std::string;
+
 class Game
 {
 public:

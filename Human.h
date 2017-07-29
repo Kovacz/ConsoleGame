@@ -1,6 +1,13 @@
 #ifndef __HUMAN_H__
 #define __HUMAN_H__
 
+#include <string>
+#include "Weapon.h"
+#include "Game.h"
+#include "HitResult.h"
+
+using std::string;
+
 class Human
 {
 public:
