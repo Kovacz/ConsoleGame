@@ -22,7 +22,7 @@ public:
 	Human *owner;
 public:
 	Weapon(double damage_, Human *owner_) : damage(damage_), owner(owner_) { /*  */ }
-	double weaponDMG() { return this->damage; }
+	double weaponDMG() { return damage; }
 };
 
 class Human
@@ -48,7 +48,7 @@ public:
 
 	virtual double inflictDMG(double damage)
 	{
-		this->health -= damage;
+		health -= damage;
 		return damage;
 	}
 
