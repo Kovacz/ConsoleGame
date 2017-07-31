@@ -11,7 +11,7 @@ using std::endl;
 ///////////////////////////////////////////////////////////
 Priest::Priest(string Name) : Mage(Name), heal(30.0F)
 { 
-	weapon = new Weapon;
+	//weapon = new Weapon;
 }
 
 double Priest::getHeal()   { return heal; }
@@ -19,15 +19,15 @@ double Priest::getHeal()   { return heal; }
 HitResult Priest::healing()
 {
 	manaCost = 100;
-	health += heal;
-	mana -= manaCost;
+	Human::heal(heal);
+	Mage::skillCost(manaCost);
 	battleLog();
 	return HitResult::Heal;
 }
 
 void Priest::action(Human *unit)
 {
-	if (health <= 30 && mana >= 100)
+	if (getHP() <= 30 && getMana() >= 100)
 	{
 		healing();
 	}
@@ -40,11 +40,14 @@ void Priest::action(Human *unit)
 
 void Priest::initWeapon()
 {
-	std::uniform_real_distribution<> urd(20, 25);
-	tmp1 = urd.min();
-	tmp2 = urd.max();
-	double tmp = Game::Instance()._randomize(urd);
-	weapon->setWeapon(tmp, this);
+	if (hasWeapon())
+	{
+		std::uniform_real_distribution<> urd(20, 25);
+		tmp1 = urd.min();
+		tmp2 = urd.max();
+		double tmp = Game::Instance()._randomize(urd);
+		getWeapon()->setWeapon(tmp, this);
+	}
 }
 
 void Priest::battleLog()
@@ -57,6 +60,9 @@ void Priest::battleLog()
 void Priest::information()
 {
 	Human::information();
-	cout << tmp1 << "/" << tmp2 << "DMG" << endl;
-	cout << getMana() << "Mana" << endl;
+	if (hasWeapon())
+	{
+		cout << tmp1 << "/" << tmp2 << "DMG";
+	}
+	cout << endl << getMana() << "Mana" << endl;
 }

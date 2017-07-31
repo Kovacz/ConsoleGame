@@ -15,22 +15,21 @@ bool Human::isAlive()		   { return getHP() > 0; }
 const string& Human::getName() { return Name;		 }
 double Human::getHP()		   { return health;		 }
 void Human::battleLog()		   { /*  */ }
+
 void Human::dropWeapon()
 { 
-	if (weapon == nullptr)
-	{
-		return;
-	}
-	else
+	if (hasWeapon())
 	{
 		delete weapon;
 		weapon = nullptr;
 	}
 }
 
-Human::Human(string name) : Name(name), health(100.0F)
+Human::Human(string name, double from, double to) : Name(name), health(100.0F)
 {
-	weapon = new Weapon;
+	std::uniform_real_distribution<> urd(from, to);
+	weapon = new Weapon(Game::Instance()._randomize(urd), this);
+	//weapon = new Weapon;
 }
 
 bool Human::hasWeapon()
@@ -52,12 +51,24 @@ void Human::action(Human *unit)
 	{
 		cout << getName() << " wins!" << endl;
 	}
+
+}
+
+Weapon *Human::getWeapon()
+{
+	return weapon;
 }
 
 double Human::inflictDMG(double damage)
 {
 	health -= damage;
 	return damage;
+}
+
+double Human::heal(double _heal)
+{
+	health += _heal;
+	return health;
 }
 
 HitResult Human::hit(Human *unit)
@@ -98,5 +109,5 @@ void Human::information()
 	cout << endl << "#" << getName() << endl;
 	cout << getHP() << "HP " << endl;
 	cout << "Weapon: ";
-	cout << (hasWeapon() ? "True - " : " False - ");
+	cout << (hasWeapon() ? "True - " : "False");
 }

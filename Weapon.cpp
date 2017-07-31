@@ -11,4 +11,7 @@ void Weapon::setWeapon(double damage_, Human *owner_)
 	owner = owner_;
 }
 
-double Weapon::weaponDMG() { return damage; }
+double Weapon::weaponDMG() 
+{ 
+		return damage;
+}

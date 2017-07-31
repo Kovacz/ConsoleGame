@@ -11,12 +11,12 @@ using std::string;
 ///////////////////////////////////////////////////////////
 class Warrior : public Human
 {
-public:
+private:
 	bool check = true;
 	double armor;
 	double resist = 0.0F;
 	double keep = 0.0F;
-	unsigned tmp1, tmp2;
+	unsigned tmp1, tmp2 = 0.0F;
 public:
 	Warrior(string Name);
 	void information();

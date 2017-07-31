@@ -38,11 +38,12 @@ void Game::pvp(Human *unit1, Human *unit2)
 {
 	while (unit1->isAlive() && unit2->isAlive())
 	{
-		if (unit1->isAlive())
+		if (unit1->isAlive() && unit1->hasWeapon())
 		{
 			unit1->action(unit2);
 		}
-		if (unit2->isAlive())
+		//else if (unit1->)
+		if (unit2->isAlive() && unit2->hasWeapon())
 		{
 			unit2->action(unit1);
 		}
@@ -55,7 +56,7 @@ void Game::Play()
 	Warrior *warrior = new Warrior("Warrior1");
 	Priest *priest = new Priest("Priest1");
 
-	warrior->dropWeapon();
+	//priest->dropWeapon();
 
 	pvp(warrior, priest);
 	cout << "///////////////Stats of characters///////////////";

@@ -7,7 +7,7 @@ using std::string;
 ///////////////////////////////////////////////////////////
 class Weapon
 {
-public:
+private:
 	double damage;
 	string Name;
 	Human *owner;

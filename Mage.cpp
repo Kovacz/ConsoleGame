@@ -8,9 +8,9 @@ using std::string;
 using std::cout;
 using std::endl;
 ///////////////////////////////////////////////////////////
-Mage::Mage(string Name) : Human(Name), mana(100.0F)
+Mage::Mage(string Name) : Human(Name, 20, 25), mana(100.0F)
 { 
-	weapon = new Weapon;
+	//weapon = new Weapon;
 	//weapon = new Weapon(Game::Instance()._randomize(urd), this);
 }
 
@@ -22,11 +22,17 @@ void Mage::action(Human *unit)
 	Human::action(unit);
 }
 
+double Mage::skillCost(double _mana)
+{
+	mana -= _mana;
+	return mana;
+}
+
 void Mage::initWeapon()
 {
 	std::uniform_real_distribution<> urd(20, 35);
 	double tmp = Game::Instance()._randomize(urd);
-	weapon->setWeapon(tmp, this);
+	getWeapon()->setWeapon(tmp, this);
 }
 
 void Mage::information()

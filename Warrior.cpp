@@ -7,7 +7,7 @@ using std::string;
 using std::cout;
 using std::endl;
 ///////////////////////////////////////////////////////////
-Warrior::Warrior(string Name) : Human(Name), armor(0.24F)
+Warrior::Warrior(string Name) : Human(Name, 15, 20), armor(0.24F)
 {
 	//weapon = new Weapon;
 	//weapon = new Weapon(Game::Instance()._randomize(urd), this);
@@ -18,7 +18,7 @@ double Warrior::getArmor() { return armor; }
 void Warrior::action(Human *unit)
 {
 	initWeapon();
-	if (!check)
+	if (!check && keep != 0.0F)
 	{
 		battleLog();
 	}
@@ -28,11 +28,14 @@ void Warrior::action(Human *unit)
 
 void Warrior::initWeapon()
 {
-	std::uniform_real_distribution<> urd(15, 20);
-	tmp1 = urd.min();
-	tmp2 = urd.max();
-	double tmp = Game::Instance()._randomize(urd);
-	weapon->setWeapon(tmp, this);
+	if (hasWeapon())
+	{
+		std::uniform_real_distribution<> urd(15, 20);
+		tmp1 = urd.min();
+		tmp2 = urd.max();
+		double tmp = Game::Instance()._randomize(urd);
+		getWeapon()->setWeapon(tmp, this);
+	}
 }
 
 void Warrior::battleLog()
@@ -43,15 +46,19 @@ void Warrior::battleLog()
 double Warrior::inflictDMG(double damage)
 {
 	keep = damage;
+	cout << keep << endl;
 	resist = damage * armor;
 	damage -= resist;
-	this->health -= damage;
+	Human::inflictDMG(damage);
 	return damage;
 }
 
 void Warrior::information()
 {
 	Human::information();
-	cout << tmp1 << "/" << tmp2 << "DMG" << endl;
-	cout << getArmor() << " Armor, blocked " << getArmor() * 100 << "% damage" << endl;
+	if (hasWeapon())
+	{
+		cout << tmp1 << "/" << tmp2 << "DMG";
+	}
+	cout << endl << getArmor() << " Armor, blocking " << getArmor() * 100 << "% damage" << endl;
 }

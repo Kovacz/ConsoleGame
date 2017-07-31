@@ -7,15 +7,15 @@ using std::string;
 ///////////////////////////////////////////////////////////
 class Mage : public Human
 {
-public:
+private:
 	double mana;
-	unsigned tmp1, tmp2;
 public:
 	Mage(string Name);
 	void information();
 	void initWeapon();
 	void action(Human *unit);
 	double getMana();
+	double skillCost(double _mana);
 };
 
 #endif // __MAGE_H__

@@ -12,17 +12,17 @@ using std::string;
 ///////////////////////////////////////////////////////////
 class Human
 {
-public:
+private:
 	double health;
 	string Name;
 	Weapon *weapon;
 public:
-	Human(string name, Game *game);
-	Human(string name);
+	Human(string name, double from, double to);
 	~Human();
 	bool isAlive();
 	bool hasWeapon();
 	void dropWeapon();
+	Weapon *getWeapon();
 	double getHP();
 	const string &getName();
 	HitResult hit(Human *unit);
@@ -31,6 +31,7 @@ public:
 	virtual void information();
 	virtual void initWeapon();
 	virtual double inflictDMG(double damage);
+	virtual double heal(double _heal);
 };
 
 #endif // __HUMAN_H__
