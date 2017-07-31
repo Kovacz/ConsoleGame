@@ -6,8 +6,8 @@ implementation
 */
 int main()
 {
-	Game *game = new Game;
-	game->Play();
+	Game &game = Game::Instance();
+	game.Play();
 
 
 	return 0;

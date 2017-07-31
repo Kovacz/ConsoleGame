@@ -1,36 +1,57 @@
-#include <string>
 #include <iomanip>
 #include <iostream>
 #include "Human.h"
-#include "Warrior.h"
 #include "Weapon.h"
-#include "Mage.h"
-#include "Priest.h"
 #include "HitResult.h"
-#include "Game.h"
-
+///////////////////////////////////////////////////////////
 using std::string;
 using std::fixed;
 using std::setprecision;
 using std::cout;
 using std::endl;
-
+///////////////////////////////////////////////////////////
 Human::~Human()				   { delete weapon;		 }
 bool Human::isAlive()		   { return getHP() > 0; }
 const string& Human::getName() { return Name;		 }
 double Human::getHP()		   { return health;		 }
 void Human::battleLog()		   { /*  */ }
-void Human::dropWeapon()	   { /*  */ }
+void Human::dropWeapon()
+{ 
+	if (weapon == nullptr)
+	{
+		return;
+	}
+	else
+	{
+		delete weapon;
+		weapon = nullptr;
+	}
+}
 
-Human::Human(string name, Game *game) : Name(name), health(100.0F)
+Human::Human(string name) : Name(name), health(100.0F)
 {
-	weapon = new Weapon(game->_randomize(), this);
+	weapon = new Weapon;
 }
 
 bool Human::hasWeapon()
 {
 	if (weapon == nullptr) { return false; }
 	else				   { return true;  }
+}
+
+void Human::initWeapon()
+{
+	std::uniform_real_distribution<> urd(15, 35);
+	double tmp = Game::Instance()._randomize(urd);
+	weapon->setWeapon(tmp, this);
+}
+
+void Human::action(Human *unit)
+{
+	if (hit(unit) == HitResult::Killed)
+	{
+		cout << getName() << " wins!" << endl;
+	}
 }
 
 double Human::inflictDMG(double damage)
@@ -71,20 +92,11 @@ HitResult Human::hit(Human *unit)
 	}
 }
 
-void Human::action(Human *unit)
-{
-	if (hit(unit) == HitResult::Killed)
-	{
-		cout << getName() << " wins!" << endl;
-	}
-}
-
 void Human::information()
 {
 	cout << fixed << setprecision(1);
 	cout << endl << "#" << getName() << endl;
+	cout << getHP() << "HP " << endl;
 	cout << "Weapon: ";
 	cout << (hasWeapon() ? "True - " : " False - ");
-	cout << weapon->weaponDMG() << "DMG" << endl;
-	cout << getHP() << "HP " << endl;
 }
