@@ -8,7 +8,7 @@ using std::string;
 using std::cout;
 using std::endl;
 ///////////////////////////////////////////////////////////
-Mage::Mage(string Name) : Human(Name, 20, 25), mana(100.0F)
+Mage::Mage(string Name, Team *team) : Human(Name, 20, 25, team), mana(100.0F)
 { 
 	//weapon = new Weapon;
 	//weapon = new Weapon(Game::Instance()._randomize(urd), this);

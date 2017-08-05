@@ -13,7 +13,7 @@ private:
 	unsigned tmp1, tmp2;
 public:
 	//Priest(string Name, Game *game);
-	Priest(string Name);
+	Priest(string Name, Team *team);
 	double getHeal();
 	HitResult healing();
 	void action(Human *unit);

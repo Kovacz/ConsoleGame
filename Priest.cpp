@@ -9,7 +9,7 @@ using std::string;
 using std::cout;
 using std::endl;
 ///////////////////////////////////////////////////////////
-Priest::Priest(string Name) : Mage(Name), heal(30.0F)
+Priest::Priest(string Name, Team *team) : Mage(Name, team), heal(30.0F)
 { 
 	//weapon = new Weapon;
 }

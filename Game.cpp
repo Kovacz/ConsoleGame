@@ -7,6 +7,7 @@
 #include "Mage.h"
 #include "Priest.h"
 #include "Game.h"
+#include "Arena.h"
 ///////////////////////////////////////////////////////////
 using std::cout;
 using std::endl;
@@ -53,13 +54,15 @@ void Game::pvp(Human *unit1, Human *unit2)
 void Game::Play()
 {
 	//Mage *mage = new Mage("Mage1", this);
-	Warrior *warrior = new Warrior("Warrior1");
-	Priest *priest = new Priest("Priest1");
+	//Warrior *warrior = new Warrior("Warrior1");
+	//Priest *priest = new Priest("Priest1");
+	Arena *arena = new Arena;
+	arena->arena_5x5();
 
-	//priest->dropWeapon();
 
-	pvp(warrior, priest);
+
+	//pvp(warrior, priest);
 	cout << "///////////////Stats of characters///////////////";
-	warrior->information();
-	priest->information();
+	//warrior->information();
+	//priest->information();
 }

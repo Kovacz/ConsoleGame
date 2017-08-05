@@ -3,6 +3,7 @@
 #include "Human.h"
 #include "Weapon.h"
 #include "HitResult.h"
+#include "Team.h"
 ///////////////////////////////////////////////////////////
 using std::string;
 using std::fixed;
@@ -25,17 +26,22 @@ void Human::dropWeapon()
 	}
 }
 
-Human::Human(string name, double from, double to) : Name(name), health(100.0F)
+Human::Human(string name, double from, double to, Team *team) : Name(name), health(100.0F)
 {
 	std::uniform_real_distribution<> urd(from, to);
 	weapon = new Weapon(Game::Instance()._randomize(urd), this);
-	//weapon = new Weapon;
+	this->team = team;
 }
 
 bool Human::hasWeapon()
 {
 	if (weapon == nullptr) { return false; }
 	else				   { return true;  }
+}
+
+Team *Human::getTeam()
+{
+	return team;
 }
 
 void Human::initWeapon()

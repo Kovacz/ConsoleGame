@@ -6,6 +6,7 @@
 #include "Game.h"
 ///////////////////////////////////////////////////////////
 class Game;
+class Team;
 class Weapon;
 enum class HitResult;
 using std::string;
@@ -16,12 +17,14 @@ private:
 	double health;
 	string Name;
 	Weapon *weapon;
+	Team *team;
 public:
-	Human(string name, double from, double to);
+	Human(string name, double from, double to, Team *team);
 	~Human();
 	bool isAlive();
 	bool hasWeapon();
 	void dropWeapon();
+	Team *getTeam();
 	Weapon *getWeapon();
 	double getHP();
 	const string &getName();
