@@ -59,7 +59,7 @@ void Arena::arena_5x5()
 					{
 						check = false;
 					}
-					dead.push_back(x);
+					dead.push_back(z);
 					//team_two.erase(team_two.begin() + j);
 				}
 				//if (i >= 4)
