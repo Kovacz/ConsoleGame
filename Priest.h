@@ -9,8 +9,9 @@ class Priest : public Mage
 {
 private:
 	double heal;
-	double manaCost;
-	unsigned tmp1, tmp2;
+	double manaCost = 100;
+	double damage;
+	int tmp1, tmp2;
 public:
 	//Priest(string Name, Game *game);
 	Priest(string Name, Team *team);
@@ -20,6 +21,7 @@ public:
 	void battleLog();
 	void initWeapon();
 	void information();
+	double inflictDMG(double damage);
 };
 
 #endif // __PRIEST_H__

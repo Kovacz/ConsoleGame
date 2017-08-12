@@ -3,49 +3,114 @@
 #include "Arena.h"
 #include "Mage.h"
 #include "Factory.h"
+#include "HitResult.h"
 
-Arena::Arena() : characters(20)
+Arena::Arena() : team_one(), team_two()
 {
 
 }
 
 void Arena::arena_5x5()
 {
-	Team *blue = new Team;
-	Team *red = new Team;
 
-	blue->form_team(characters);
-	red->form_team(characters);
+	std::cout << "Welcome to the Arena, heroes!" << std::endl;
 
-	std::cout << "1";
+	Team *blue = new Team("Blue");
+	Team *red = new Team("Red");
 
-	std::cout << characters.empty();
 
-	for (auto i : characters)
+	blue->form_team(team_one);
+	red->form_team(team_two);
+
+	int i = 0;
+	int j = 0;
+	vector <Human *> dead;
+	while (check)
 	{
-		if (i->getTeam() == blue && i->isAlive() && check == true)
+		for (auto z : team_one)
 		{
-			for (auto j : characters)
+			for (auto x : team_two)
 			{
-				if (j->getTeam() == red && j->isAlive()) 
+				std::cout << "///////////" << std::endl;
+				std::cout << "Round: " << i << std::endl;
+				std::cout << std::endl;
+				if (z->isAlive() && z->hasWeapon())
 				{
-					i->action(j);
-					std::cout << i->getName() << " hit" << j->getName() << std::endl;
+					z->action(x);
 				}
+				if (x->isAlive() && x->hasWeapon())
+				{
+					x->action(z);
+				}
+				else if (!x->isAlive())
+				{
+					++j;
+					if (j == 4)
+					{
+						check = false;
+					}
+					dead.push_back(x);
+					//team_two.erase(team_two.begin() + j);
+				}
+				else if (!z->isAlive())
+				{
+					++i;
+					if (i == 4)
+					{
+						check = false;
+					}
+					dead.push_back(x);
+					//team_two.erase(team_two.begin() + j);
+				}
+				//if (i >= 4)
+				//{
+				//	i = 0;
+				//}
+				//++i;
 			}
-			check = false;
 		}
+		std::cout << dead.size() << std::endl;
+	}
 
-		if (i->getTeam() == red && i->isAlive() && check == false)
-		{
-			for (auto j : characters)
-			{
-				if (j->getTeam() == blue && j->isAlive())
-				{
-					i->action(j);
-				}
-			}
-			check = true;
-		}
+
+	//while (team_one[i]->isAlive() || team_two[i]->isAlive())
+	//{
+	//	std::cout << "///////////" << std::endl;
+	//	std::cout << "Round: " << j << std::endl;
+	//	std::cout << std::endl;
+	//	if (team_one[i]->isAlive() && team_one[i]->hasWeapon())
+	//	{
+	//		team_one[i]->action(team_two[i]);
+	//	}
+	//	if (team_two[i]->isAlive() && team_two[i]->hasWeapon())
+	//	{
+	//		team_two[i]->action(team_one[i]);
+	//	}
+	//	if (!team_two[i]->isAlive())
+	//	{
+	//		if (dead.size() == 4)
+	//		{
+	//			break;
+	//		}
+	//		dead.push_back(team_two[i]);
+	//		std::cout << dead.size() << std::endl;
+	//		//team_two.erase(team_two.begin() + i);
+	//	}
+	//	if (i >= 4)
+	//	{
+	//		i = 0;
+	//	}
+	//	++i;
+	//	++j;
+	//}
+	std::cout << "///////////////Stats of Blue Team///////////////";
+	for (auto i : team_one)
+	{
+		i->information();
+	}
+	std::cout << "///////////////Stats of Red Team///////////////";
+	for (auto i : team_two)
+	{
+		i->information();
 	}
 }

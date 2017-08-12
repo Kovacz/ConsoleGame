@@ -22,6 +22,20 @@ void Mage::action(Human *unit)
 	Human::action(unit);
 }
 
+void Mage::battleLog()
+{
+	getTeamName();
+	cout << " " << getName() << " got " << damage << " damage." << endl
+		<< "Left " << getHP() << " HP" << endl;
+}
+
+double Mage::inflictDMG(double damage)
+{
+	this->damage = damage;
+	Human::inflictDMG(damage);
+	return damage;
+}
+
 double Mage::skillCost(double _mana)
 {
 	mana -= _mana;

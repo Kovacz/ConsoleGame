@@ -18,11 +18,20 @@ double Priest::getHeal()   { return heal; }
 
 HitResult Priest::healing()
 {
-	manaCost = 100;
 	Human::heal(heal);
 	Mage::skillCost(manaCost);
-	battleLog();
+	getTeamName();
+	cout << " " << getName() << " heal himself"
+		<< " (+" << getHeal() << "HP|-" << manaCost << "Mana)" << endl
+		<< "Left " << getMana() << " Mana" << endl;
 	return HitResult::Heal;
+}
+
+double Priest::inflictDMG(double damage)
+{
+	this->damage = damage;
+	Human::inflictDMG(damage);
+	return damage;
 }
 
 void Priest::action(Human *unit)
@@ -52,9 +61,9 @@ void Priest::initWeapon()
 
 void Priest::battleLog()
 {
-	cout << getName() << " heal himself"
-		 << " (+" << getHeal() << "HP|-" << manaCost << "Mana)" << endl
-		 << "Left " << getMana() << " Mana" << endl;
+	getTeamName();
+	cout << " " << getName() << " got " << damage << " damage." << endl
+		 << "Left " << getHP() << " HP" << endl;
 }
 
 void Priest::information()

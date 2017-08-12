@@ -18,11 +18,6 @@ double Warrior::getArmor() { return armor; }
 void Warrior::action(Human *unit)
 {
 	initWeapon();
-	if (!check && keep != 0.0F)
-	{
-		battleLog();
-	}
-	check = false;
 	Human::action(unit);
 }
 
@@ -40,13 +35,15 @@ void Warrior::initWeapon()
 
 void Warrior::battleLog()
 {
-	cout << "Absorbed: " << resist << " of " << keep << "DMG" << endl << endl;
+	getTeamName();
+	cout << " " << getName() << " got " << keep << " damage." << endl
+		 << "Left " << getHP() << " HP" << endl;
+	cout << "Absorbed: " << resist << " of " << keep << "DMG" << endl;
 }
 
 double Warrior::inflictDMG(double damage)
 {
 	keep = damage;
-	cout << keep << endl;
 	resist = damage * armor;
 	damage -= resist;
 	Human::inflictDMG(damage);

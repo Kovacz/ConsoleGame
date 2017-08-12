@@ -43,7 +43,6 @@ void Game::pvp(Human *unit1, Human *unit2)
 		{
 			unit1->action(unit2);
 		}
-		//else if (unit1->)
 		if (unit2->isAlive() && unit2->hasWeapon())
 		{
 			unit2->action(unit1);
@@ -62,7 +61,7 @@ void Game::Play()
 
 
 	//pvp(warrior, priest);
-	cout << "///////////////Stats of characters///////////////";
+	//cout << "///////////////Stats of characters///////////////";
 	//warrior->information();
 	//priest->information();
 }

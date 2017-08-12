@@ -24,6 +24,7 @@ public:
 	bool isAlive();
 	bool hasWeapon();
 	void dropWeapon();
+	void getTeamName();
 	Team *getTeam();
 	Weapon *getWeapon();
 	double getHP();
