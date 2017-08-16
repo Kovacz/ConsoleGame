@@ -1,10 +1,13 @@
 #ifndef __ARENA_H__
 #define __ARENA_H__
 #include <vector>
+#include <iostream>
+#include <queue>
 ///////////////////////////////////////////////////////////
 class Human;
 class Team;
 using std::vector;
+using std::queue;
 ///////////////////////////////////////////////////////////
 class Arena
 {

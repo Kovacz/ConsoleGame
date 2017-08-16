@@ -1,4 +1,3 @@
-#include <iostream>
 #include "Team.h"
 #include "Arena.h"
 #include "Mage.h"
@@ -19,98 +18,80 @@ void Arena::arena_5x5()
 	Team *red = new Team("Red");
 
 
+
+
 	blue->form_team(team_one);
 	red->form_team(team_two);
 
-	int i = 0;
-	int j = 0;
+	queue <Human *> qu;
 	vector <Human *> dead;
-	while (check)
+
+	while (i != team_one.size())
 	{
-		for (auto z : team_one)
+		if (!team_one.empty() && !team_two.empty())
 		{
-			for (auto x : team_two)
+			qu.emplace(team_one.at(i));
+			qu.emplace(team_two.at(i));
+		}
+		++i;
+	}
+
+	i = 0;
+	std::cout << std::endl;
+	while (qu.size() != 4)
+	{
+		std::cout << "///////////" << std::endl;
+		std::cout << "Round: " << i << std::endl;
+		std::cout << std::endl;
+		if (qu.front()->isAlive() && qu.front()->getTeam() == blue)
+		{
+			auto temp = qu.front();
+			qu.emplace(temp);
+			qu.pop();
+			if (temp->isAlive() && temp->hasWeapon() && qu.front()->getTeam() == red)
 			{
-				std::cout << "///////////" << std::endl;
-				std::cout << "Round: " << i << std::endl;
-				std::cout << std::endl;
-				if (z->isAlive() && z->hasWeapon())
-				{
-					z->action(x);
-				}
-				if (x->isAlive() && x->hasWeapon())
-				{
-					x->action(z);
-				}
-				else if (!x->isAlive())
-				{
-					++j;
-					if (j == 4)
-					{
-						check = false;
-					}
-					dead.push_back(x);
-					//team_two.erase(team_two.begin() + j);
-				}
-				else if (!z->isAlive())
-				{
-					++i;
-					if (i == 4)
-					{
-						check = false;
-					}
-					dead.push_back(z);
-					//team_two.erase(team_two.begin() + j);
-				}
-				//if (i >= 4)
-				//{
-				//	i = 0;
-				//}
-				//++i;
+				temp->action(qu.front());
 			}
 		}
-		std::cout << dead.size() << std::endl;
+		else if (qu.front()->isAlive() && qu.front()->getTeam() == red)
+		{
+			auto temp = qu.front();
+			qu.emplace(temp);
+			qu.pop();
+			if (temp->isAlive() && temp->hasWeapon() && qu.front()->getTeam() == blue)
+			{
+				temp->action(qu.front());
+			}
+		}
+		else
+		{
+
+			dead.push_back(qu.front());
+
+
+			qu.pop();
+		}
+		++i;
 	}
 
 
-	//while (team_one[i]->isAlive() || team_two[i]->isAlive())
+	std::cout << "///////////////Dead///////////////";
+	for (auto i : dead)
+	{
+		std::cout << std::endl;
+		std::cout << "Team: ";
+		i->getTeamName();
+		i->information();
+	}
+
+	//std::cout << "///////////////Stats of Blue Team///////////////";
+	//for (auto i : team_one)
 	//{
-	//	std::cout << "///////////" << std::endl;
-	//	std::cout << "Round: " << j << std::endl;
-	//	std::cout << std::endl;
-	//	if (team_one[i]->isAlive() && team_one[i]->hasWeapon())
-	//	{
-	//		team_one[i]->action(team_two[i]);
-	//	}
-	//	if (team_two[i]->isAlive() && team_two[i]->hasWeapon())
-	//	{
-	//		team_two[i]->action(team_one[i]);
-	//	}
-	//	if (!team_two[i]->isAlive())
-	//	{
-	//		if (dead.size() == 4)
-	//		{
-	//			break;
-	//		}
-	//		dead.push_back(team_two[i]);
-	//		std::cout << dead.size() << std::endl;
-	//		//team_two.erase(team_two.begin() + i);
-	//	}
-	//	if (i >= 4)
-	//	{
-	//		i = 0;
-	//	}
-	//	++i;
-	//	++j;
+	//	i->information();
 	//}
-	std::cout << "///////////////Stats of Blue Team///////////////";
-	for (auto i : team_one)
-	{
-		i->information();
-	}
-	std::cout << "///////////////Stats of Red Team///////////////";
-	for (auto i : team_two)
-	{
-		i->information();
-	}
+	//std::cout << "///////////////Stats of Red Team///////////////";
+	//for (auto i : team_two)
+	//{
+	//	i->information();
+	//}
 }

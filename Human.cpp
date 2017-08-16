@@ -89,6 +89,8 @@ HitResult Human::hit(Human *unit)
 	double damageDone = unit->inflictDMG(weapon->weaponDMG());
 	if (!unit->isAlive())
 	{
+		cout << fixed << setprecision(1);
+		unit->battleLog();
 		unit->getTeamName();
 		cout << " " << unit->getName() << " was killed!" << endl;
 		return HitResult::Killed;
