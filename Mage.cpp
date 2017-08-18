@@ -44,7 +44,7 @@ double Mage::skillCost(double _mana)
 
 void Mage::initWeapon()
 {
-	std::uniform_real_distribution<> urd(20, 35);
+	std::uniform_real_distribution<> urd(40, 55);
 	double tmp = Game::Instance()._randomize(urd);
 	getWeapon()->setWeapon(tmp, this);
 }

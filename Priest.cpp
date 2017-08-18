@@ -51,7 +51,7 @@ void Priest::initWeapon()
 {
 	if (hasWeapon())
 	{
-		std::uniform_real_distribution<> urd(20, 25);
+		std::uniform_real_distribution<> urd(30, 45);
 		tmp1 = urd.min();
 		tmp2 = urd.max();
 		double tmp = Game::Instance()._randomize(urd);

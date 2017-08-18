@@ -4,10 +4,12 @@
 #include "Factory.h"
 #include "HitResult.h"
 
-Arena::Arena() : team_one(), team_two()
+Arena::Arena() 
 {
 
 }
+
+
 
 void Arena::arena_5x5()
 {
@@ -17,58 +19,44 @@ void Arena::arena_5x5()
 	Team *blue = new Team("Blue");
 	Team *red = new Team("Red");
 
-
-
-
-	blue->form_team(team_one);
-	red->form_team(team_two);
-
 	queue <Human *> qu;
 	vector <Human *> dead;
 
-	while (i != team_one.size())
+	while (i != teamSize)
 	{
-		if (!team_one.empty() && !team_two.empty())
+		if (!blue->getVec().empty() && !red->getVec().empty())
 		{
-			qu.emplace(team_one.at(i));
-			qu.emplace(team_two.at(i));
+			qu.push(blue->getVec().at(i));
+			qu.push(red->getVec().at(i));
 		}
 		++i;
 	}
 
+
 	i = 0;
 	std::cout << std::endl;
-	while (qu.size() != 4)
+	while (check)
 	{
-		std::cout << "///////////" << std::endl;
+		std::cout << "//////////////////////" << std::endl;
 		std::cout << "Round: " << i << std::endl;
 		std::cout << std::endl;
-		if (qu.front()->isAlive() && qu.front()->getTeam() == blue)
+		if (!blue->anyOneAlive() || !red->anyOneAlive())
 		{
-			auto temp = qu.front();
-			qu.emplace(temp);
-			qu.pop();
-			if (temp->isAlive() && temp->hasWeapon() && qu.front()->getTeam() == red)
-			{
-				temp->action(qu.front());
-			}
+			check = false;
 		}
-		else if (qu.front()->isAlive() && qu.front()->getTeam() == red)
+		if (qu.front()->isAlive())
 		{
 			auto temp = qu.front();
-			qu.emplace(temp);
+			qu.push(temp);
 			qu.pop();
-			if (temp->isAlive() && temp->hasWeapon() && qu.front()->getTeam() == blue)
+			if (temp->isAlive() && temp->hasWeapon() && qu.front()->getTeam() != temp->getTeam())
 			{
-				temp->action(qu.front());
+					temp->action(qu.front());
 			}
 		}
 		else
 		{
-
 			dead.push_back(qu.front());
-
-
 			qu.pop();
 		}
 		++i;

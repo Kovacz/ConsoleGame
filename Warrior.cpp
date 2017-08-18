@@ -25,7 +25,7 @@ void Warrior::initWeapon()
 {
 	if (hasWeapon())
 	{
-		std::uniform_real_distribution<> urd(15, 20);
+		std::uniform_real_distribution<> urd(35, 40);
 		tmp1 = urd.min();
 		tmp2 = urd.max();
 		double tmp = Game::Instance()._randomize(urd);

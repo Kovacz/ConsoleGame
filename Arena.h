@@ -1,7 +1,10 @@
 #ifndef __ARENA_H__
 #define __ARENA_H__
+#define teamSize 5
+///////////////////////////////////////////////////////////
 #include <vector>
 #include <iostream>
+#include <algorithm> 
 #include <queue>
 ///////////////////////////////////////////////////////////
 class Human;
@@ -15,8 +18,8 @@ private:
 	bool check = true;
 	int i = 0;
 	vector<Human *> characters;
-	vector<Human *> team_one;
-	vector<Human *> team_two;
+	double b_hp = 0;
+	double r_hp = 0;
 public:
 	Arena();
 	void arena_5x5();

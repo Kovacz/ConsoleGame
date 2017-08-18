@@ -1,18 +1,60 @@
-#include <iostream>
 #include "Team.h"
-#include "Factory.h"
-//#include "Factory.cpp"
 
-Team::Team(string tName)
+Team::Team(string tName) : team_one(), team_two()
 {
-	Name = tName;
+	if (tName == "Blue")
+	{
+		Name = "Blue";
+		form_team(team_one);
+	}
+	else if (tName == "Red")
+	{
+		Name = "Red";
+		form_team(team_two);
+	}
 }
 
 void Team::getName()
 {
-	std::cout << Name;
+	cout << Name;
 }
 
+//Human Team::weakest()
+//{
+//	
+//}
+
+vector<Human *> Team::getVec()
+{
+	if (Name == "Blue")
+	{
+		return team_one;
+	}
+	else if (Name == "Red")
+	{
+		return team_two;
+	}
+}
+
+bool Team::anyOneAlive()
+{
+	if (Name == "Blue")
+	{
+		if (!team_one.at(0)->isAlive() && !team_one.at(1)->isAlive() && !team_one.at(2)->isAlive() && !team_one.at(3)->isAlive() && !team_one.at(4)->isAlive())
+		{
+			return false;
+		}
+		return true;
+	}
+	else if (Name == "Red")
+	{
+		if (!team_two.at(0)->isAlive() && !team_two.at(1)->isAlive() && !team_two.at(2)->isAlive() && !team_two.at(3)->isAlive() && !team_two.at(4)->isAlive())
+		{
+			return false;
+		}
+		return true;
+	}
+}
 
 void Team::form_team(vector<Human *> &v)
 {
@@ -22,7 +64,7 @@ void Team::form_team(vector<Human *> &v)
 
 	std::cout << "Here it is, a ";
 	getName();
-	std::cout << " team" << std::endl;
+	std::cout << " team: " << std::endl;
 
 	v.push_back(warrior_factory->create("Warrior1", this));
 	v.push_back(warrior_factory->create("Warrior2", this));
@@ -32,7 +74,7 @@ void Team::form_team(vector<Human *> &v)
 
 	for (auto i : v)
 	{
-		std::cout << i->getName() << std::endl;
+		cout << i->getName() << endl;
 	}
 }
 
