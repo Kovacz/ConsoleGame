@@ -23,12 +23,13 @@ private:
 	vector<Human *> team_one;
 	vector<Human *> team_two;
 	string Name;
+	Human *best_enemy = nullptr;
 public:
 	Team(string tName);
 	void add(Human *unit);
 	void form_team(vector<Human *> &v);
 	void getName();
-	Human weakest();
+	Human *getLeastLivesAlive();
 	vector<Human *> getVec();
 	bool anyOneAlive();
 	bool getTMP();

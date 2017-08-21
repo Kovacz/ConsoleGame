@@ -46,12 +46,22 @@ void Arena::arena_5x5()
 		}
 		if (qu.front()->isAlive())
 		{
-			auto temp = qu.front();
-			qu.push(temp);
+			auto fighter = qu.front();
+			Team *enemy_team = fighter->getTeam() == red ? blue : red;
+			auto best_enemy = enemy_team->getLeastLivesAlive();
+			qu.push(fighter);
 			qu.pop();
-			if (temp->isAlive() && temp->hasWeapon() && qu.front()->getTeam() != temp->getTeam())
+
+			if (i >= 10 && best_enemy && fighter->isAlive() && fighter->hasWeapon() && best_enemy->getTeam() != fighter->getTeam())
 			{
-					temp->action(qu.front());
+				fighter->action(best_enemy);
+				std::cout << "BEST ENEMY: " << std::endl;
+				best_enemy->getTeamName();
+				std::cout << best_enemy->getName() << " " << best_enemy->getHP() << std::endl;
+			}
+			else if (i < 10 && fighter->isAlive() && fighter->hasWeapon() && qu.front()->getTeam() != fighter->getTeam())
+			{
+				fighter->action(qu.front());
 			}
 		}
 		else
@@ -59,6 +69,8 @@ void Arena::arena_5x5()
 			dead.push_back(qu.front());
 			qu.pop();
 		}
+		if (i > 50)
+			check = false;
 		++i;
 	}
 

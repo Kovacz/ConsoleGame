@@ -19,10 +19,38 @@ void Team::getName()
 	cout << Name;
 }
 
-//Human Team::weakest()
-//{
-//	
-//}
+Human *Team::getLeastLivesAlive()
+{
+	static int min_hp = 101;
+	if (Name == "Blue")
+	{
+		for (auto i : team_one)
+		{
+			if (i->getHP() < min_hp && i->isAlive())
+			{
+				min_hp = i->getHP();
+				best_enemy = i;
+			}
+			else
+				min_hp = 101;
+		}
+		return best_enemy;
+	}
+	else if (Name == "Red")
+	{
+		for (auto j : team_two)
+		{
+			if (j->getHP() < min_hp && j->isAlive())
+			{
+				min_hp = j->getHP();
+				best_enemy = j;
+			}
+			else
+				min_hp = 101;
+		}
+		return best_enemy;
+	}
+}
 
 vector<Human *> Team::getVec()
 {
