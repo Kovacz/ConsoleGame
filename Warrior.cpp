@@ -7,10 +7,9 @@ using std::string;
 using std::cout;
 using std::endl;
 ///////////////////////////////////////////////////////////
-Warrior::Warrior(string Name, Team *team) : Human(Name, 15, 20, team), armor(0.24F)
+Warrior::Warrior(Team *team) : Human("Warrior", 15, 20, team), armor(0.24F)
 {
-	//weapon = new Weapon;
-	//weapon = new Weapon(Game::Instance()._randomize(urd), this);
+
 }
 
 double Warrior::getArmor() { return armor; }

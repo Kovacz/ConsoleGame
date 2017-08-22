@@ -1,9 +1,11 @@
 #ifndef __TEAM_H__
 #define __TEAM_H__
+#define teamSize 5
 ///////////////////////////////////////////////////////////
 #include <string>
 #include <algorithm> 
 #include <iostream>
+#include <random> 
 #include <vector> 
 #include "Arena.h"
 #include "Factory.h"
@@ -20,14 +22,13 @@ private:
 	WarriorFactory *warrior_factory;
 	PriestFactory  *priest_factory;
 	MageFactory    *mage_factory;
-	vector<Human *> team_one;
-	vector<Human *> team_two;
+	vector<Human *> champions;
 	string Name;
 	Human *best_enemy = nullptr;
 public:
 	Team(string tName);
-	void add(Human *unit);
-	void form_team(vector<Human *> &v);
+	Factory *init_team();
+	void form_team(vector<Human *> &champions);
 	void getName();
 	Human *getLeastLivesAlive();
 	vector<Human *> getVec();

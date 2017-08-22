@@ -2,17 +2,22 @@
 
 Factory::~Factory() { /*  */ }
 
-Human *MageFactory::create(string name, Team *team)
+//Human *Factory::create(Team *team)
+//{ 
+//	return new Human("Human", 0, 0, team);
+//}
+
+Human *MageFactory::create(Team *team)
 {
-	return new Mage(name, team);
+	return new Mage(team);
 }
 
-Human *WarriorFactory::create(string name, Team *team)
+Human *WarriorFactory::create(Team *team)
 {
-	return new Warrior(name, team);
+	return new Warrior(team);
 }
 
-Human *PriestFactory::create(string name, Team *team)
+Human *PriestFactory::create(Team *team)
 {
-	return new Priest(name, team);
+	return new Priest(team);
 }

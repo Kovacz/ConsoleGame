@@ -13,6 +13,8 @@ Arena::Arena()
 
 void Arena::arena_5x5()
 {
+	//vector<Team *> teams;
+	//vector<Human *> champions;
 
 	std::cout << "Welcome to the Arena, heroes!" << std::endl;
 

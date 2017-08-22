@@ -5,22 +5,24 @@
 ///////////////////////////////////////////////////////////
 using std::string;
 ///////////////////////////////////////////////////////////
-class Priest : public Mage
+class Priest : public Human
 {
 private:
 	double heal;
+	double mana;
 	double manaCost = 100;
 	double damage;
 	int tmp1, tmp2;
 public:
-	//Priest(string Name, Game *game);
-	Priest(string Name, Team *team);
+	Priest(Team *team);
 	double getHeal();
 	HitResult healing();
 	void action(Human *unit);
 	void battleLog();
 	void initWeapon();
 	void information();
+	double getMana();
+	double skillCost(double _mana);
 	double inflictDMG(double damage);
 };
 

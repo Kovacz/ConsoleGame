@@ -9,17 +9,24 @@ using std::string;
 using std::cout;
 using std::endl;
 ///////////////////////////////////////////////////////////
-Priest::Priest(string Name, Team *team) : Mage(Name, team), heal(30.0F)
+Priest::Priest(Team *team) : Human("Priest", 20, 25, team), heal(30.0F), mana(100)
 { 
-	//weapon = new Weapon;
+
 }
 
 double Priest::getHeal()   { return heal; }
+double Priest::getMana()   { return mana; }
+
+double Priest::skillCost(double _mana)
+{
+	mana -= _mana;
+	return mana;
+}
 
 HitResult Priest::healing()
 {
 	Human::heal(heal);
-	Mage::skillCost(manaCost);
+	skillCost(manaCost);
 	getTeamName();
 	cout << " " << getName() << " heal himself"
 		<< " (+" << getHeal() << "HP|-" << manaCost << "Mana)" << endl

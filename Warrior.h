@@ -18,7 +18,7 @@ private:
 	double keep = 0.0F;
 	unsigned tmp1, tmp2 = 0.0F;
 public:
-	Warrior(string Name, Team *team);
+	Warrior(Team *team);
 	void information();
 	void battleLog();
 	void initWeapon();

@@ -1,17 +1,8 @@
 #include "Team.h"
 
-Team::Team(string tName) : team_one(), team_two()
+Team::Team(string tName) : champions(), Name(tName)
 {
-	if (tName == "Blue")
-	{
-		Name = "Blue";
-		form_team(team_one);
-	}
-	else if (tName == "Red")
-	{
-		Name = "Red";
-		form_team(team_two);
-	}
+	form_team(champions);
 }
 
 void Team::getName()
@@ -22,91 +13,65 @@ void Team::getName()
 Human *Team::getLeastLivesAlive()
 {
 	static int min_hp = 101;
-	if (Name == "Blue")
+	for (auto i : champions)
 	{
-		for (auto i : team_one)
+		if (i->getHP() < min_hp && i->isAlive())
 		{
-			if (i->getHP() < min_hp && i->isAlive())
-			{
-				min_hp = i->getHP();
-				best_enemy = i;
-			}
-			else
-				min_hp = 101;
+			min_hp = i->getHP();
+			best_enemy = i;
 		}
-		return best_enemy;
+		else
+			min_hp = 101;
 	}
-	else if (Name == "Red")
-	{
-		for (auto j : team_two)
-		{
-			if (j->getHP() < min_hp && j->isAlive())
-			{
-				min_hp = j->getHP();
-				best_enemy = j;
-			}
-			else
-				min_hp = 101;
-		}
-		return best_enemy;
-	}
+	return best_enemy;
 }
 
 vector<Human *> Team::getVec()
 {
-	if (Name == "Blue")
-	{
-		return team_one;
-	}
-	else if (Name == "Red")
-	{
-		return team_two;
-	}
+	return champions;
 }
 
 bool Team::anyOneAlive()
 {
-	if (Name == "Blue")
+	if (!champions.at(0)->isAlive() && !champions.at(1)->isAlive() && !champions.at(2)->isAlive() && !champions.at(3)->isAlive() && !champions.at(4)->isAlive())
 	{
-		if (!team_one.at(0)->isAlive() && !team_one.at(1)->isAlive() && !team_one.at(2)->isAlive() && !team_one.at(3)->isAlive() && !team_one.at(4)->isAlive())
-		{
-			return false;
-		}
-		return true;
+		return false;
 	}
-	else if (Name == "Red")
-	{
-		if (!team_two.at(0)->isAlive() && !team_two.at(1)->isAlive() && !team_two.at(2)->isAlive() && !team_two.at(3)->isAlive() && !team_two.at(4)->isAlive())
-		{
-			return false;
-		}
-		return true;
-	}
+	return true;
 }
 
-void Team::form_team(vector<Human *> &v)
+void Team::form_team(vector<Human *> &champions)
 {
-	warrior_factory = new WarriorFactory;
-	priest_factory = new PriestFactory;
-	mage_factory = new MageFactory;
-
 	std::cout << "Here it is, a ";
 	getName();
 	std::cout << " team: " << std::endl;
 
-	v.push_back(warrior_factory->create("Warrior1", this));
-	v.push_back(warrior_factory->create("Warrior2", this));
-	v.push_back(priest_factory->create("Priest1", this));
-	v.push_back(mage_factory->create("Mage1", this));
-	v.push_back(mage_factory->create("Mage2", this));
+	for (int i = 0; i != teamSize; i++)
+	{
+		champions.push_back(init_team()->create(this));
+	}
 
-	for (auto i : v)
+	//champions.push_back(warrior_factory->create("Warrior1", this));
+	//champions.push_back(warrior_factory->create("Warrior2", this));
+	//champions.push_back(priest_factory->create("Priest1", this));
+	//champions.push_back(mage_factory->create("Mage1", this));
+	//champions.push_back(mage_factory->create("Mage2", this));
+
+	for (auto i : champions)
 	{
 		cout << i->getName() << endl;
 	}
 }
 
-void Team::add(Human *unit)
+Factory *Team::init_team()
 {
-	//unit->setTeam(this);
+	Factory *factory[5];
+	factory[0] = new MageFactory;
+	factory[1] = new PriestFactory;
+	factory[2] = new WarriorFactory;
+
+	static std::mt19937 genu(time(nullptr));
+	static std::uniform_int_distribution<> uid(0, 2);
+	auto result = uid(genu);
+	return factory[result];
 }

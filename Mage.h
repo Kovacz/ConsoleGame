@@ -11,7 +11,7 @@ private:
 	double mana;
 	double damage;
 public:
-	Mage(string Name, Team *team);
+	Mage(Team *team);
 	void information();
 	void initWeapon();
 	void battleLog();

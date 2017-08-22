@@ -10,26 +10,26 @@ class Human;
 class Factory
 {
 public:
-	virtual Human *create(string name, Team *team) = 0;
+	virtual Human *create(Team *team) = 0;
 	virtual ~Factory();
 };
 
 class MageFactory : public Factory
 {
 public:
-	Human *create(string name, Team *team);
+	Human *create(Team *team);
 };
 
 class WarriorFactory : public Factory
 {
 public:
-	Human *create(string name, Team *team);
+	Human *create(Team *team);
 };
 
 class PriestFactory : public Factory
 {
 public:
-	Human *create(string name, Team *team);
+	Human *create(Team *team);
 };
 
 #endif // __FACTORY_H__
