@@ -1,17 +1,8 @@
-#include <iostream>
-#include <cstdlib>
-#include <cmath>
 #include "Human.h"
-#include "Warrior.h"
 #include "Weapon.h"
-#include "Mage.h"
-#include "Priest.h"
 #include "Game.h"
 #include "Arena.h"
-///////////////////////////////////////////////////////////
-using std::cout;
-using std::endl;
-///////////////////////////////////////////////////////////
+
 Game &Game::Instance()
 {
 	static Game instance;

@@ -2,8 +2,13 @@
 #define __GAME_H__
 #include <random> 
 #include <ctime>
+#include <iostream>
+#include <cstdlib>
+#include <cmath>
 ///////////////////////////////////////////////////////////
 class Human;
+using std::cout;
+using std::endl;
 ///////////////////////////////////////////////////////////
 class Game
 {
