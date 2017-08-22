@@ -7,10 +7,9 @@
 #include <iostream>
 #include <random> 
 #include <vector> 
-#include "Arena.h"
-#include "Factory.h"
 ///////////////////////////////////////////////////////////
 class Human;
+class Factory;
 using std::string;
 using std::cout;
 using std::endl;
@@ -19,14 +18,13 @@ using std::vector;
 class Team
 {
 private:
-	WarriorFactory *warrior_factory;
-	PriestFactory  *priest_factory;
-	MageFactory    *mage_factory;
-	vector<Human *> champions;
 	string Name;
+	Factory *factory[3];
+	vector<Human *> champions;
 	Human *best_enemy = nullptr;
 public:
 	Team(string tName);
+	~Team();
 	Factory *init_team();
 	void form_team(vector<Human *> &champions);
 	void getName();

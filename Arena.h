@@ -18,10 +18,9 @@ private:
 	bool check = true;
 	int i = 0;
 	vector<Human *> characters;
-	double b_hp = 0;
-	double r_hp = 0;
 public:
 	Arena();
+	~Arena();
 	void arena_5x5();
 	void arena_deathmatch();
 };

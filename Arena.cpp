@@ -1,15 +1,16 @@
 #include "Team.h"
 #include "Arena.h"
-#include "Mage.h"
 #include "Factory.h"
-#include "HitResult.h"
 
 Arena::Arena() 
 {
 
 }
 
-
+Arena::~Arena()
+{
+	//delete
+}
 
 void Arena::arena_5x5()
 {
@@ -37,14 +38,16 @@ void Arena::arena_5x5()
 
 	i = 0;
 	std::cout << std::endl;
-	while (check)
+	//while (check)
+	while (true)
 	{
 		std::cout << "//////////////////////" << std::endl;
 		std::cout << "Round: " << i << std::endl;
 		std::cout << std::endl;
 		if (!blue->anyOneAlive() || !red->anyOneAlive())
 		{
-			check = false;
+			break;
+			//check = false;
 		}
 		if (qu.front()->isAlive())
 		{
@@ -71,8 +74,6 @@ void Arena::arena_5x5()
 			dead.push_back(qu.front());
 			qu.pop();
 		}
-		if (i > 50)
-			check = false;
 		++i;
 	}
 
@@ -86,14 +87,14 @@ void Arena::arena_5x5()
 		i->information();
 	}
 
-	//std::cout << "///////////////Stats of Blue Team///////////////";
-	//for (auto i : team_one)
-	//{
-	//	i->information();
-	//}
-	//std::cout << "///////////////Stats of Red Team///////////////";
-	//for (auto i : team_two)
-	//{
-	//	i->information();
-	//}
+	std::cout << "///////////////Stats of Blue Team///////////////";
+	for (auto i : blue->getVec())
+	{
+		i->information();
+	}
+	std::cout << "///////////////Stats of Red Team///////////////";
+	for (auto j : red->getVec())
+	{
+		j->information();
+	}
 }

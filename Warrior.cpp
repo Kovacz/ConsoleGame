@@ -1,12 +1,8 @@
-#include <iostream>
 #include "Human.h"
 #include "Warrior.h"
 #include "Weapon.h"
-///////////////////////////////////////////////////////////
-using std::string;
-using std::cout;
-using std::endl;
-///////////////////////////////////////////////////////////
+#include "Game.h"
+
 Warrior::Warrior(Team *team) : Human("Warrior", 15, 20, team), armor(0.24F)
 {
 
@@ -25,8 +21,8 @@ void Warrior::initWeapon()
 	if (hasWeapon())
 	{
 		std::uniform_real_distribution<> urd(35, 40);
-		tmp1 = urd.min();
-		tmp2 = urd.max();
+		minVal = urd.min();
+		maxVal = urd.max();
 		double tmp = Game::Instance()._randomize(urd);
 		getWeapon()->setWeapon(tmp, this);
 	}
@@ -54,7 +50,7 @@ void Warrior::information()
 	Human::information();
 	if (hasWeapon())
 	{
-		cout << tmp1 << "/" << tmp2 << "DMG";
+		cout << minVal << "/" << maxVal << "DMG";
 	}
 	cout << endl << getArmor() << " Armor, blocking " << getArmor() * 100 << "% damage" << endl;
 }

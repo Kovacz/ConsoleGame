@@ -3,13 +3,18 @@
 #include <string>
 #include <random> 
 #include <ctime>
-#include "Game.h"
+#include <iomanip>
+#include <iostream>
 ///////////////////////////////////////////////////////////
 class Game;
 class Team;
 class Weapon;
 enum class HitResult;
 using std::string;
+using std::fixed;
+using std::setprecision;
+using std::cout;
+using std::endl;
 ///////////////////////////////////////////////////////////
 class Human
 {

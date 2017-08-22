@@ -1,8 +1,18 @@
 #include "Team.h"
+#include "Arena.h"
+#include "Factory.h"
 
 Team::Team(string tName) : champions(), Name(tName)
 {
 	form_team(champions);
+}
+
+Team::~Team()
+{
+	for (auto i : factory)
+	{
+		delete i;
+	}
 }
 
 void Team::getName()
@@ -12,7 +22,7 @@ void Team::getName()
 
 Human *Team::getLeastLivesAlive()
 {
-	static int min_hp = 101;
+	static double min_hp = 999.0F;
 	for (auto i : champions)
 	{
 		if (i->getHP() < min_hp && i->isAlive())
@@ -21,7 +31,9 @@ Human *Team::getLeastLivesAlive()
 			best_enemy = i;
 		}
 		else
-			min_hp = 101;
+		{
+			min_hp = 999.0F;
+		}
 	}
 	return best_enemy;
 }
@@ -33,7 +45,7 @@ vector<Human *> Team::getVec()
 
 bool Team::anyOneAlive()
 {
-	if (!champions.at(0)->isAlive() && !champions.at(1)->isAlive() && !champions.at(2)->isAlive() && !champions.at(3)->isAlive() && !champions.at(4)->isAlive())
+	if (std::all_of(champions.begin(), champions.end(), [](Human *h) { return !h->isAlive(); })) 
 	{
 		return false;
 	}
@@ -51,12 +63,6 @@ void Team::form_team(vector<Human *> &champions)
 		champions.push_back(init_team()->create(this));
 	}
 
-	//champions.push_back(warrior_factory->create("Warrior1", this));
-	//champions.push_back(warrior_factory->create("Warrior2", this));
-	//champions.push_back(priest_factory->create("Priest1", this));
-	//champions.push_back(mage_factory->create("Mage1", this));
-	//champions.push_back(mage_factory->create("Mage2", this));
-
 	for (auto i : champions)
 	{
 		cout << i->getName() << endl;
@@ -65,7 +71,6 @@ void Team::form_team(vector<Human *> &champions)
 
 Factory *Team::init_team()
 {
-	Factory *factory[5];
 	factory[0] = new MageFactory;
 	factory[1] = new PriestFactory;
 	factory[2] = new WarriorFactory;

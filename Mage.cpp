@@ -1,13 +1,8 @@
-#include <iostream>
 #include "Human.h"
 #include "Mage.h"
-#include "Game.h"
 #include "Weapon.h"
-///////////////////////////////////////////////////////////
-using std::string;
-using std::cout;
-using std::endl;
-///////////////////////////////////////////////////////////
+#include "Game.h"
+
 Mage::Mage(Team *team) : Human("Mage", 20, 25, team), mana(100.0F)
 { 
 

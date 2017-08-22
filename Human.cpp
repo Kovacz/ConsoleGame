@@ -1,16 +1,9 @@
-#include <iomanip>
-#include <iostream>
+#include "Game.h"
 #include "Human.h"
 #include "Weapon.h"
 #include "HitResult.h"
 #include "Team.h"
-///////////////////////////////////////////////////////////
-using std::string;
-using std::fixed;
-using std::setprecision;
-using std::cout;
-using std::endl;
-///////////////////////////////////////////////////////////
+
 Human::~Human()				   { delete weapon;		 }
 bool Human::isAlive()		   { return getHP() > 0; }
 const string& Human::getName() { return Name;		 }

@@ -1,14 +1,9 @@
-#include <iostream>
 #include "Human.h"
 #include "Priest.h"
-#include "HitResult.h"
-#include "Game.h"
 #include "Weapon.h"
-///////////////////////////////////////////////////////////
-using std::string;
-using std::cout;
-using std::endl;
-///////////////////////////////////////////////////////////
+#include "Game.h"
+#include "HitResult.h"
+
 Priest::Priest(Team *team) : Human("Priest", 20, 25, team), heal(30.0F), mana(100)
 { 
 
@@ -59,8 +54,8 @@ void Priest::initWeapon()
 	if (hasWeapon())
 	{
 		std::uniform_real_distribution<> urd(30, 45);
-		tmp1 = urd.min();
-		tmp2 = urd.max();
+		minVal = urd.min();
+		maxVal = urd.max();
 		double tmp = Game::Instance()._randomize(urd);
 		getWeapon()->setWeapon(tmp, this);
 	}
@@ -78,7 +73,7 @@ void Priest::information()
 	Human::information();
 	if (hasWeapon())
 	{
-		cout << tmp1 << "/" << tmp2 << "DMG";
+		cout << minVal << "/" << maxVal << "DMG";
 	}
 	cout << endl << getMana() << "Mana" << endl;
 }
