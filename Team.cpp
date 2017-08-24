@@ -20,22 +20,30 @@ void Team::getName()
 	cout << Name;
 }
 
+bool Team::cmp(Human &lhs, Human &rhs)
+{
+	if (lhs.isAlive() && rhs.isAlive())
+	{
+		return lhs.getHP() < rhs.getHP();
+	}
+}
+
 Human *Team::getLeastLivesAlive()
 {
-	static double min_hp = 999.0F;
-	for (auto i : champions)
-	{
-		if (i->getHP() < min_hp && i->isAlive())
-		{
-			min_hp = i->getHP();
-			best_enemy = i;
-		}
-		else
-		{
-			min_hp = 999.0F;
-		}
-	}
-	return best_enemy;
+	auto best_enemy = std::min_element(
+										champions.begin(), 
+										champions.end(), 
+										[](Human *lhs, Human *rhs) 
+										{ 
+
+											if (lhs->isAlive() && rhs->isAlive())
+											{
+												return lhs->getHP() < rhs->getHP();
+											}
+
+										}
+									  ); // min_element
+	return (*best_enemy);
 }
 
 vector<Human *> Team::getVec()
@@ -45,11 +53,7 @@ vector<Human *> Team::getVec()
 
 bool Team::anyOneAlive()
 {
-	if (std::all_of(champions.begin(), champions.end(), [](Human *h) { return !h->isAlive(); })) 
-	{
-		return false;
-	}
-	return true;
+	return std::any_of(champions.begin(), champions.end(), [](Human *h) { return h->isAlive(); });
 }
 
 void Team::form_team(vector<Human *> &champions)

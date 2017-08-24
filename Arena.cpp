@@ -57,7 +57,7 @@ void Arena::arena_5x5()
 				fighter->action(best_enemy);
 				std::cout << "BEST ENEMY: " << std::endl;
 				best_enemy->getTeamName();
-				std::cout << best_enemy->getName() << " " << best_enemy->getHP() << std::endl;
+				std::cout << " " << best_enemy->getName() << " " << best_enemy->getHP() << std::endl;
 			}
 		}
 		if (!qu.front()->isAlive())

@@ -7,6 +7,7 @@
 #include <iostream>
 #include <random> 
 #include <vector> 
+#include "Human.h"
 ///////////////////////////////////////////////////////////
 class Human;
 class Factory;
@@ -21,7 +22,7 @@ private:
 	string Name;
 	Factory *factory[3];
 	vector<Human *> champions;
-	Human *best_enemy = nullptr;
+	//Human *best_enemy = nullptr;
 public:
 	Team(string tName);
 	~Team();
@@ -31,7 +32,7 @@ public:
 	Human *getLeastLivesAlive();
 	vector<Human *> getVec();
 	bool anyOneAlive();
-	bool getTMP();
+	bool cmp( Human &lhs,  Human &rhs);
 };
 
 #endif // __TEAM_H__
