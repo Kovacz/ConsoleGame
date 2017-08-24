@@ -61,7 +61,7 @@ double Human::inflictDMG(double damage)
 	return damage;
 }
 
-double Human::heal(double _heal)
+double Human::heal(double _heal, Human *unit)
 {
 	health += _heal;
 	return health;

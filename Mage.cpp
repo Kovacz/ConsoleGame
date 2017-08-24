@@ -3,7 +3,7 @@
 #include "Weapon.h"
 #include "Game.h"
 
-Mage::Mage(Team *team) : Human("Mage", 20, 25, team), mana(100.0F)
+Mage::Mage(Team *team) : Human("Mage", 0, 0, team), mana(100.0F)
 { 
 
 }
@@ -38,13 +38,22 @@ double Mage::skillCost(double _mana)
 
 void Mage::initWeapon()
 {
-	std::uniform_real_distribution<> urd(40, 55);
-	double tmp = Game::Instance()._randomize(urd);
-	getWeapon()->setWeapon(tmp, this);
+	if (hasWeapon())
+	{
+		std::uniform_real_distribution<> urd(35, 45);
+		minVal = urd.min();
+		maxVal = urd.max();
+		double tmp = Game::Instance()._randomize(urd);
+		getWeapon()->setWeapon(tmp, this);
+	}
 }
 
 void Mage::information()
 {
 	Human::information();
-	cout << getMana() << "Mana" << endl;
+	if (hasWeapon())
+	{
+		cout << minVal << "/" << maxVal << " DMG";
+	}
+	cout << endl << getMana() << " Mana" << endl;
 }

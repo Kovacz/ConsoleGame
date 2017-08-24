@@ -1,6 +1,7 @@
 #ifndef __ARENA_H__
 #define __ARENA_H__
 #define teamSize 5
+#define twoTeamsSize 10
 ///////////////////////////////////////////////////////////
 #include <vector>
 #include <iostream>
@@ -15,9 +16,11 @@ using std::queue;
 class Arena
 {
 private:
-	bool check = true;
 	int i = 0;
-	vector<Human *> characters;
+	Team *red = nullptr;
+	Team *blue = nullptr;
+	vector<Team *> teams;
+	//vector<Human *> champions;
 public:
 	Arena();
 	~Arena();

@@ -4,12 +4,12 @@
 #include "Game.h"
 #include "HitResult.h"
 
-Priest::Priest(Team *team) : Human("Priest", 20, 25, team), heal(30.0F), mana(100)
+Priest::Priest(Team *team) : Human("Priest", 0, 0, team), healthValue(30.0F), mana(100)
 { 
 
 }
 
-double Priest::getHeal()   { return heal; }
+double Priest::getHeal()   { return healthValue; }
 double Priest::getMana()   { return mana; }
 
 double Priest::skillCost(double _mana)
@@ -18,9 +18,9 @@ double Priest::skillCost(double _mana)
 	return mana;
 }
 
-HitResult Priest::healing()
+HitResult Priest::healing(Human *unit)
 {
-	Human::heal(heal);
+	Human::heal(healthValue, unit);
 	skillCost(manaCost);
 	getTeamName();
 	cout << " " << getName() << " heal himself"
@@ -38,9 +38,9 @@ double Priest::inflictDMG(double damage)
 
 void Priest::action(Human *unit)
 {
-	if (getHP() <= 30 && getMana() >= 100)
+	if (getHP() <= 30 && getMana() >= 99)
 	{
-		healing();
+		healing(this);
 	}
 	else
 	{
@@ -53,7 +53,7 @@ void Priest::initWeapon()
 {
 	if (hasWeapon())
 	{
-		std::uniform_real_distribution<> urd(30, 45);
+		std::uniform_real_distribution<> urd(30, 40);
 		minVal = urd.min();
 		maxVal = urd.max();
 		double tmp = Game::Instance()._randomize(urd);
@@ -73,7 +73,7 @@ void Priest::information()
 	Human::information();
 	if (hasWeapon())
 	{
-		cout << minVal << "/" << maxVal << "DMG";
+		cout << minVal << "/" << maxVal << " DMG";
 	}
-	cout << endl << getMana() << "Mana" << endl;
+	cout << endl << getMana() << " Mana" << endl;
 }

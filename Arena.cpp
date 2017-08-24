@@ -9,18 +9,16 @@ Arena::Arena()
 
 Arena::~Arena()
 {
-	//delete
+	delete red;
+	delete blue;
 }
 
 void Arena::arena_5x5()
 {
-	//vector<Team *> teams;
-	//vector<Human *> champions;
-
 	std::cout << "Welcome to the Arena, heroes!" << std::endl;
 
-	Team *blue = new Team("Blue");
-	Team *red = new Team("Red");
+	blue = new Team("Blue");
+	red = new Team("Red");
 
 	queue <Human *> qu;
 	vector <Human *> dead;
@@ -35,20 +33,13 @@ void Arena::arena_5x5()
 		++i;
 	}
 
-
 	i = 0;
 	std::cout << std::endl;
-	//while (check)
-	while (true)
+	while (blue->anyOneAlive() && red->anyOneAlive())
 	{
 		std::cout << "//////////////////////" << std::endl;
 		std::cout << "Round: " << i << std::endl;
 		std::cout << std::endl;
-		if (!blue->anyOneAlive() || !red->anyOneAlive())
-		{
-			break;
-			//check = false;
-		}
 		if (qu.front()->isAlive())
 		{
 			auto fighter = qu.front();
@@ -57,19 +48,19 @@ void Arena::arena_5x5()
 			qu.push(fighter);
 			qu.pop();
 
-			if (i >= 10 && best_enemy && fighter->isAlive() && fighter->hasWeapon() && best_enemy->getTeam() != fighter->getTeam())
+			if (i < twoTeamsSize && fighter->isAlive() && fighter->hasWeapon() && qu.front()->getTeam() != fighter->getTeam())
+			{
+				fighter->action(qu.front());
+			}
+			else if (i >= twoTeamsSize && best_enemy->isAlive() && fighter->isAlive() && fighter->hasWeapon() && best_enemy->getTeam() != fighter->getTeam())
 			{
 				fighter->action(best_enemy);
 				std::cout << "BEST ENEMY: " << std::endl;
 				best_enemy->getTeamName();
 				std::cout << best_enemy->getName() << " " << best_enemy->getHP() << std::endl;
 			}
-			else if (i < 10 && fighter->isAlive() && fighter->hasWeapon() && qu.front()->getTeam() != fighter->getTeam())
-			{
-				fighter->action(qu.front());
-			}
 		}
-		else
+		if (!qu.front()->isAlive())
 		{
 			dead.push_back(qu.front());
 			qu.pop();

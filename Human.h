@@ -19,10 +19,10 @@ using std::endl;
 class Human
 {
 private:
-	double health;
+	double health = 0.0F;
 	string Name;
-	Weapon *weapon;
-	Team *team;
+	Weapon *weapon = nullptr;
+	Team *team = nullptr;
 public:
 	Human(string name, double from, double to, Team *team);
 	~Human();
@@ -40,7 +40,7 @@ public:
 	virtual void information();
 	virtual void initWeapon();
 	virtual double inflictDMG(double damage);
-	virtual double heal(double _heal);
+	virtual double heal(double _heal, Human *unit);
 };
 
 #endif // __HUMAN_H__

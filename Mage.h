@@ -11,8 +11,10 @@ using std::endl;
 class Mage : public Human
 {
 private:
-	double mana;
-	double damage;
+	double mana = 0.0F;
+	double damage = 0.0F;
+	double maxVal = 0.0F;
+	double minVal = 0.0F;
 public:
 	Mage(Team *team);
 	void information();

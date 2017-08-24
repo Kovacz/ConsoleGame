@@ -3,7 +3,7 @@
 #include "Weapon.h"
 #include "Game.h"
 
-Warrior::Warrior(Team *team) : Human("Warrior", 15, 20, team), armor(0.24F)
+Warrior::Warrior(Team *team) : Human("Warrior", 0, 0, team), armor(0.24F)
 {
 
 }
@@ -20,7 +20,7 @@ void Warrior::initWeapon()
 {
 	if (hasWeapon())
 	{
-		std::uniform_real_distribution<> urd(35, 40);
+		std::uniform_real_distribution<> urd(30, 35);
 		minVal = urd.min();
 		maxVal = urd.max();
 		double tmp = Game::Instance()._randomize(urd);
@@ -50,7 +50,7 @@ void Warrior::information()
 	Human::information();
 	if (hasWeapon())
 	{
-		cout << minVal << "/" << maxVal << "DMG";
+		cout << minVal << "/" << maxVal << " DMG";
 	}
 	cout << endl << getArmor() << " Armor, blocking " << getArmor() * 100 << "% damage" << endl;
 }
