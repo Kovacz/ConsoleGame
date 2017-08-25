@@ -47,20 +47,20 @@ void Team::whoWin()
 Human *Team::getLeastLivesAlive()
 {
 	auto best_enemy = std::min_element(
-											champions.begin(), 
-											champions.end(), 
-											[](Human *lhs, Human *rhs) 
-											{ 
-												if (lhs->isAlive() && rhs->isAlive())
-												{
-													return lhs->getHP() < rhs->getHP();
-												}
-												else if (lhs->isAlive() || rhs->isAlive())
-												{
-													return rhs->getHP() < lhs->getHP();
-												}
-											}
-									  ); //min_element
+						champions.begin(), 
+						champions.end(), 
+						[](Human *lhs, Human *rhs) 
+						{ 
+							if (lhs->isAlive() && rhs->isAlive())
+							{
+								return lhs->getHP() < rhs->getHP();
+							}
+							else if (lhs->isAlive() || rhs->isAlive())
+							{
+								return rhs->getHP() < lhs->getHP();
+							}
+						}
+				  	   ); // min_element
 	return (*best_enemy);
 }
 
