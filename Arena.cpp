@@ -88,8 +88,8 @@ void Arena::arena_5x5()
 		std::cout << std::endl;
 
 		if (
-				      qu.front()->isAlive()
-				&&  ( blue->anyOneAlive()	|| red->anyOneAlive() )
+			      qu.front()->isAlive()
+			&&  ( blue->anyOneAlive()	|| red->anyOneAlive() )
 		   )
 		{
 			auto fighter = qu.front();
@@ -99,33 +99,23 @@ void Arena::arena_5x5()
 			qu.pop();
 
 			if (
-					    i < twoTeamsSize 
-					&&  fighter->isAlive() 
-					&&  fighter->hasWeapon() 
-					&&  qu.front()->getTeam() != fighter->getTeam()
-				) 
-			{
-				fighter->action( qu.front() );
-			} /* if */
-			else if (
-							i >= twoTeamsSize 
-						&&  best_enemy
-						&&  best_enemy->isAlive() 
-						&&  fighter->isAlive() 
-						&&  fighter->hasWeapon() 
-						&&  best_enemy->getTeam() != fighter->getTeam()
-					) 
+				    best_enemy
+				&&  best_enemy->isAlive() 
+				&&  fighter->isAlive() 
+				&&  fighter->hasWeapon() 
+				&&  best_enemy->getTeam() != fighter->getTeam()
+			   ) 
 			{
 				fighter->action(best_enemy);
 				cout << "BEST ENEMY: " << endl;
 				best_enemy->getTeamName();
 				cout << " " << best_enemy->getName() << best_enemy->getID() << " " << best_enemy->getHP() << endl;
-			} /* else if */	
+			} /* _if_ */	
 			if (!best_enemy->isAlive())
 			{
 				dead.push_back( best_enemy );
 			}
-		} /* if( qu.front()->isAlive()&&(blue->isAllAlive()||red->isAllAlive()) ) */
+		} /* _if_ */
 
 		if ( !qu.front()->isAlive() )
 		{
