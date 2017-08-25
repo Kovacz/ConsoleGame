@@ -1,5 +1,6 @@
 #ifndef __GAME_H__
 #define __GAME_H__
+///////////////////////////////////////////////////////////
 #include <random> 
 #include <ctime>
 #include <iostream>
@@ -16,11 +17,9 @@ private:
 	std::mt19937 gen;
 	std::uniform_real_distribution<> urd;
 public:
-	//Game();
-	void pvp(Human *unit1, Human *unit2);
 	void Play();
 	static Game &Instance();
-	unsigned _randomize();
+	unsigned _randomize(unsigned from, unsigned to);
 	double _randomize(std::uniform_real_distribution<> urd);
 private:
 	Game();

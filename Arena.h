@@ -10,6 +10,7 @@
 ///////////////////////////////////////////////////////////
 class Human;
 class Team;
+enum class ArenaTypes;
 using std::vector;
 using std::queue;
 ///////////////////////////////////////////////////////////
@@ -24,7 +25,9 @@ private:
 public:
 	Arena();
 	~Arena();
+	void arena_type(unsigned type);
 	void arena_5x5();
+	void pvp(Human *unit1, Human *unit2);
 	void arena_deathmatch();
 };
 

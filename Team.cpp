@@ -1,10 +1,12 @@
 #include "Team.h"
 #include "Arena.h"
 #include "Factory.h"
+#include "Game.h"
 
-Team::Team(string tName) : champions(), Name(tName)
+Team::Team(string tName, unsigned tSize) : champions(), Name(tName)
 {
-	form_team(champions);
+	changeTeamSize(tSize);
+	form_team();
 }
 
 Team::~Team()
@@ -20,29 +22,45 @@ void Team::getName()
 	cout << Name;
 }
 
-bool Team::cmp(Human &lhs, Human &rhs)
+const void Team::changeTeamSize(unsigned &size)
 {
-	if (lhs.isAlive() && rhs.isAlive())
+	team_size = size;
+}
+
+void Team::whoWin()
+{
+	if (anyOneAlive())
 	{
-		return lhs.getHP() < rhs.getHP();
+		cout << endl << "/////////////// Congratulations! The " << Name << " team won! ///////////////";
+		for (auto i : getVec())
+		{
+			if (i->isAlive())
+			{
+				i->information();
+			}
+		}
+		cout << endl;
 	}
 }
+
 
 Human *Team::getLeastLivesAlive()
 {
 	auto best_enemy = std::min_element(
-										champions.begin(), 
-										champions.end(), 
-										[](Human *lhs, Human *rhs) 
-										{ 
-
-											if (lhs->isAlive() && rhs->isAlive())
-											{
-												return lhs->getHP() < rhs->getHP();
+											champions.begin(), 
+											champions.end(), 
+											[](Human *lhs, Human *rhs) 
+											{ 
+												if (lhs->isAlive() && rhs->isAlive())
+												{
+													return lhs->getHP() < rhs->getHP();
+												}
+												else if (lhs->isAlive() || rhs->isAlive())
+												{
+													return rhs->getHP() < lhs->getHP();
+												}
 											}
-
-										}
-									  ); // min_element
+									  ); //min_element
 	return (*best_enemy);
 }
 
@@ -56,20 +74,21 @@ bool Team::anyOneAlive()
 	return std::any_of(champions.begin(), champions.end(), [](Human *h) { return h->isAlive(); });
 }
 
-void Team::form_team(vector<Human *> &champions)
+void Team::form_team()
 {
-	std::cout << "Here it is, a ";
+	cout << "Here it is, a ";
 	getName();
-	std::cout << " team: " << std::endl;
+	cout << " team: " << endl;
 
-	for (int i = 0; i != teamSize; i++)
+	for (int i = 0; i != team_size; i++)
 	{
 		champions.push_back(init_team()->create(this));
 	}
 
 	for (auto i : champions)
 	{
-		cout << i->getName() << endl;
+		cout.width(10);
+		cout << i->getName() << "#" << std::setw(5) << i->getID() << endl;
 	}
 }
 
@@ -79,8 +98,6 @@ Factory *Team::init_team()
 	factory[1] = new PriestFactory;
 	factory[2] = new WarriorFactory;
 
-	static std::mt19937 genu(time(nullptr));
-	static std::uniform_int_distribution<> uid(0, 2);
-	auto result = uid(genu);
+	auto result = Game::Instance()._randomize(0, 2);
 	return factory[result];
 }

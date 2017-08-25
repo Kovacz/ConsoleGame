@@ -5,7 +5,8 @@
 
 Mage::Mage(Team *team) : Human("Mage", 0, 0, team), mana(100.0F)
 { 
-
+	static unsigned mage_id = 0;
+	Human::setID(++mage_id);
 }
 
 double Mage::getMana() { return mana; }
@@ -19,7 +20,7 @@ void Mage::action(Human *unit)
 void Mage::battleLog()
 {
 	getTeamName();
-	cout << " " << getName() << " got " << damage << " damage." << endl
+	cout << " " << getName() << getID() << " got " << damage << " DMG of " << getHP() + damage << " HP" << endl
 		<< "Left " << getHP() << " HP" << endl;
 }
 

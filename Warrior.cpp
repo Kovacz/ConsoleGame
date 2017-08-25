@@ -5,7 +5,8 @@
 
 Warrior::Warrior(Team *team) : Human("Warrior", 0, 0, team), armor(0.24F)
 {
-
+	static unsigned war_id = 0;
+	Human::setID(++war_id);
 }
 
 double Warrior::getArmor() { return armor; }
@@ -31,16 +32,16 @@ void Warrior::initWeapon()
 void Warrior::battleLog()
 {
 	getTeamName();
-	cout << " " << getName() << " got " << keep << " damage." << endl
+	cout << " " << getName() << getID() << " got " << keep << " DMG of " << getHP() + keep << " HP" << endl
 		 << "Left " << getHP() << " HP" << endl;
-	cout << "Absorbed: " << resist << " of " << keep << "DMG" << endl;
+	cout << "Absorbed: " << resist << " of " << keep << " DMG" << endl;
 }
 
 double Warrior::inflictDMG(double damage)
 {
-	keep = damage;
 	resist = damage * armor;
 	damage -= resist;
+	keep = damage;
 	Human::inflictDMG(damage);
 	return damage;
 }

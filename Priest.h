@@ -11,12 +11,12 @@ using std::endl;
 class Priest : public Human
 {
 private:
-	double healthValue = 0.0F;
-	double mana = 0.0F;
-	double manaCost = 100.0F;
-	double damage = 0.0F;
-	double maxVal = 0.0F;
-	double minVal = 0.0F;
+	double healthValue	= 0.0F;
+	double mana			= 0.0F;
+	double manaCost		= 100.0F;
+	double damage		= 0.0F;
+	double maxVal		= 0.0F;
+	double minVal		= 0.0F;
 public:
 	Priest(Team *team);
 	double getHeal();

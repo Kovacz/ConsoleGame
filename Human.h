@@ -19,21 +19,24 @@ using std::endl;
 class Human
 {
 private:
-	double health = 0.0F;
 	string Name;
-	Weapon *weapon = nullptr;
-	Team *team = nullptr;
+	unsigned id		= 0;
+	double health	= 0.0F;
+	Team *team		= nullptr;
+	Weapon *weapon	= nullptr;
 public:
 	Human(string name, double from, double to, Team *team);
 	~Human();
 	bool isAlive();
+	double getHP();
 	bool hasWeapon();
+	unsigned getID();
 	void dropWeapon();
 	void getTeamName();
+	void setID(unsigned id_);
+	const string &getName();
 	Team *getTeam();
 	Weapon *getWeapon();
-	double getHP();
-	const string &getName();
 	HitResult hit(Human *unit);
 	virtual void battleLog();
 	virtual void action(Human *unit);

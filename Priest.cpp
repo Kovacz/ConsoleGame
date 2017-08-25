@@ -6,7 +6,8 @@
 
 Priest::Priest(Team *team) : Human("Priest", 0, 0, team), healthValue(30.0F), mana(100)
 { 
-
+	static unsigned priest_id = 0;
+	Human::setID(++priest_id);
 }
 
 double Priest::getHeal()   { return healthValue; }
@@ -64,7 +65,7 @@ void Priest::initWeapon()
 void Priest::battleLog()
 {
 	getTeamName();
-	cout << " " << getName() << " got " << damage << " damage." << endl
+	cout << " " << getName() << getID() << " got " << damage << " DMG of " << getHP() + damage << " HP" << endl
 		 << "Left " << getHP() << " HP" << endl;
 }
 
