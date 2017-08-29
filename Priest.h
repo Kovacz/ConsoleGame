@@ -19,6 +19,7 @@ private:
 	double minVal		= 0.0F;
 public:
 	Priest(Team *team);
+	~Priest();
 	double getHeal();
 	HitResult healing(Human *unit);
 	void action(Human *unit);
