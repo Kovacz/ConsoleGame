@@ -1,12 +1,7 @@
-#ifndef __MAGE_H__
-#define __MAGE_H__
+#pragma once
 ///////////////////////////////////////////////////////////
 #include <string>
 #include <iostream>
-///////////////////////////////////////////////////////////
-using std::string;
-using std::cout;
-using std::endl;
 ///////////////////////////////////////////////////////////
 class Mage : public Human
 {
@@ -26,5 +21,3 @@ public:
 	double skillCost(double _mana);
 	double inflictDMG(double damage);
 };
-
-#endif // __MAGE_H__

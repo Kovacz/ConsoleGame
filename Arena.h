@@ -1,5 +1,4 @@
-#ifndef __ARENA_H__
-#define __ARENA_H__
+#pragma once
 #define teamSize 5
 #define twoTeamsSize 10
 ///////////////////////////////////////////////////////////
@@ -11,17 +10,14 @@
 class Human;
 class Team;
 enum class ArenaTypes;
-using std::vector;
-using std::queue;
 ///////////////////////////////////////////////////////////
 class Arena
 {
 private:
 	int i = 0;
-	Team *red = nullptr;
+	Team *red  = nullptr;
 	Team *blue = nullptr;
-	vector<Team *> teams;
-	//vector<Human *> champions;
+	std::vector<Team *> teams;
 public:
 	Arena();
 	~Arena();
@@ -30,5 +26,3 @@ public:
 	void pvp(Human *unit1, Human *unit2);
 	void arena_deathmatch();
 };
-
-#endif // __ARENA_H__

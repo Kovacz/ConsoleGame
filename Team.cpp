@@ -3,7 +3,7 @@
 #include "Factory.h"
 #include "Game.h"
 
-Team::Team(string tName, unsigned tSize) : champions(), Name(tName)
+Team::Team(std::string tName, const unsigned tSize) : champions(), Name(tName)
 {
 	changeTeamSize(tSize);
 	form_team();
@@ -19,10 +19,10 @@ Team::~Team()
 
 void Team::getName()
 {
-	cout << Name;
+	std::cout << Name;
 }
 
-const void Team::changeTeamSize(unsigned &size)
+const void Team::changeTeamSize(const unsigned &size)
 {
 	team_size = size;
 }
@@ -31,7 +31,7 @@ void Team::whoWin()
 {
 	if (anyOneAlive())
 	{
-		cout << endl << "/////////////// Congratulations! The " << Name << " team won! ///////////////";
+		std::cout << std::endl << "/////////////// Congratulations! The " << Name << " team won! ///////////////";
 		for (auto i : getVec())
 		{
 			if (i->isAlive())
@@ -39,7 +39,7 @@ void Team::whoWin()
 				i->information();
 			}
 		}
-		cout << endl;
+		std::cout << std::endl;
 	}
 }
 
@@ -64,7 +64,7 @@ Human *Team::getLeastLivesAlive()
 	return (*best_enemy);
 }
 
-vector<Human *> Team::getVec()
+std::vector<Human *> Team::getVec()
 {
 	return champions;
 }
@@ -76,9 +76,9 @@ bool Team::anyOneAlive()
 
 void Team::form_team()
 {
-	cout << "Here it is, a ";
+	std::cout << "Here it is, a ";
 	getName();
-	cout << " team: " << endl;
+	std::cout << " team: " << std::endl;
 
 	for (int i = 0; i != team_size; i++)
 	{
@@ -87,8 +87,8 @@ void Team::form_team()
 
 	for (auto i : champions)
 	{
-		cout.width(10);
-		cout << i->getName() << "#" << std::setw(5) << i->getID() << endl;
+		std::cout.width(10);
+		std::cout << i->getName() << "#" << std::setw(5) << i->getID() << std::endl;
 	}
 }
 

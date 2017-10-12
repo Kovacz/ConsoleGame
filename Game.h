@@ -1,5 +1,4 @@
-#ifndef __GAME_H__
-#define __GAME_H__
+#pragma once
 ///////////////////////////////////////////////////////////
 #include <random> 
 #include <ctime>
@@ -8,8 +7,6 @@
 #include <cmath>
 ///////////////////////////////////////////////////////////
 class Human;
-using std::cout;
-using std::endl;
 ///////////////////////////////////////////////////////////
 class Game
 {
@@ -19,13 +16,11 @@ private:
 public:
 	void Play();
 	static Game &Instance();
-	unsigned _randomize(unsigned from, unsigned to);
+	unsigned _randomize(const unsigned &from, const unsigned &to);
 	double _randomize(std::uniform_real_distribution<> urd);
 private:
 	Game();
-	Game(double from, double to);
+	~Game();
 	Game(Game const&) = delete;
 	Game &operator=(Game const&) = delete;
-
 };
-#endif // __GAME_H__

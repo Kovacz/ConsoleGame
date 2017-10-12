@@ -9,14 +9,22 @@ Game &Game::Instance()
 	return instance;
 }
 
-Game::Game() : gen(time(nullptr)), urd(0, 0) { /*  */ }
+Game::Game() : gen(time(nullptr)), urd(0, 0) 
+{
+	/*...*/ 
+}
+
+Game::~Game() 
+{ 
+	/*...*/ 
+}
 
 double Game::_randomize(std::uniform_real_distribution<> urd)
 { 
 	return urd(gen); 
 }
 
-unsigned Game::_randomize(unsigned from, unsigned to)
+unsigned Game::_randomize(const unsigned &from, const  unsigned &to)
 {
 	static std::mt19937 genu(time(nullptr));
 	static std::uniform_int_distribution<> uid(from, to);
@@ -27,11 +35,9 @@ unsigned Game::_randomize(unsigned from, unsigned to)
 
 void Game::Play()
 {
-
 	unsigned const arena5x5 = 5;
 	unsigned const pvp		= 1;
 
 	Arena *arena = new Arena();
 	arena->arena_type(arena5x5);
-
 }

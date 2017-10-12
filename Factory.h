@@ -1,5 +1,4 @@
-#ifndef __FACTORY_H__
-#define __FACTORY_H__
+#pragma once
 #include "Human.h"
 #include "Warrior.h"
 #include "Mage.h"
@@ -31,5 +30,3 @@ class PriestFactory : public Factory
 public:
 	Human *create(Team *team);
 };
-
-#endif // __FACTORY_H__

@@ -20,8 +20,8 @@ void Mage::action(Human *unit)
 void Mage::battleLog()
 {
 	getTeamName();
-	cout << " " << getName() << getID() << " got " << damage << " DMG of " << getHP() + damage << " HP" << endl
-		<< "Left " << getHP() << " HP" << endl;
+	std::cout << " " << getName() << getID() << " got " << damage << " DMG of " << getHP() + damage << " HP" << std::endl
+		<< "Left " << getHP() << " HP" << std::endl;
 }
 
 double Mage::inflictDMG(double damage)
@@ -54,7 +54,7 @@ void Mage::information()
 	Human::information();
 	if (hasWeapon())
 	{
-		cout << minVal << "/" << maxVal << " DMG";
+		std::cout << minVal << "/" << maxVal << " DMG";
 	}
-	cout << endl << getMana() << " Mana" << endl;
+	std::cout << std::endl << getMana() << " Mana" << std::endl;
 }

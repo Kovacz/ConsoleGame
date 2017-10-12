@@ -1,21 +1,17 @@
-#ifndef __WEAPON_H__
-#define __WEAPON_H__
+#pragma once
 #include <string>
 ///////////////////////////////////////////////////////////
 class Human;
-using std::string;
 ///////////////////////////////////////////////////////////
 class Weapon
 {
 private:
-	double damage;
-	string Name;
-	Human *owner;
+	double damage = 0.F;
+	std::string Name;
+	Human *owner  = nullptr;
 public:
 	Weapon();
 	Weapon(double damage_, Human *owner_);
-	void setWeapon(double damage_, Human *owner_);
-	double weaponDMG();
+	const void setWeapon(double &damage_, Human *owner_);
+	const double weaponDMG();
 };
-
-#endif // __WEAPON_H__

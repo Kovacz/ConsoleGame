@@ -10,10 +10,10 @@ Priest::Priest(Team *team) : Human("Priest", 0, 0, team), healthValue(30.0F), ma
 	Human::setID(++priest_id);
 }
 
-double Priest::getHeal()   { return healthValue; }
-double Priest::getMana()   { return mana; }
+const double Priest::getHeal()   { return healthValue; }
+const double Priest::getMana()   { return mana; }
 
-double Priest::skillCost(double _mana)
+double Priest::skillCost(const double &_mana)
 {
 	mana -= _mana;
 	return mana;
@@ -24,13 +24,13 @@ HitResult Priest::healing(Human *unit)
 	Human::heal(healthValue, unit);
 	skillCost(manaCost);
 	getTeamName();
-	cout << " " << getName() << " heal himself"
-		<< " (+" << getHeal() << "HP|-" << manaCost << "Mana)" << endl
-		<< "Left " << getMana() << " Mana" << endl;
+	std::cout << " " << getName() << " heal himself"
+		<< " (+" << getHeal() << "HP|-" << manaCost << "Mana)" << std::endl
+		<< "Left " << getMana() << " Mana" << std::endl;
 	return HitResult::Heal;
 }
 
-double Priest::inflictDMG(double damage)
+double Priest::inflictDMG(const double &damage)
 {
 	this->damage = damage;
 	Human::inflictDMG(damage);
@@ -65,8 +65,8 @@ void Priest::initWeapon()
 void Priest::battleLog()
 {
 	getTeamName();
-	cout << " " << getName() << getID() << " got " << damage << " DMG of " << getHP() + damage << " HP" << endl
-		 << "Left " << getHP() << " HP" << endl;
+	std::cout << " " << getName() << getID() << " got " << damage << " DMG of " << getHP() + damage << " HP" << std::endl
+		 << "Left " << getHP() << " HP" << std::endl;
 }
 
 void Priest::information()
@@ -74,7 +74,7 @@ void Priest::information()
 	Human::information();
 	if (hasWeapon())
 	{
-		cout << minVal << "/" << maxVal << " DMG";
+		std::cout << minVal << "/" << maxVal << " DMG";
 	}
-	cout << endl << getMana() << " Mana" << endl;
+	std::cout << std::endl << getMana() << " Mana" << std::endl;
 }

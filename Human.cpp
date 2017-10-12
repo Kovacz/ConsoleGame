@@ -4,16 +4,17 @@
 #include "HitResult.h"
 #include "Team.h"
 
-Human::~Human()				   { delete weapon;		 }
-bool Human::isAlive()		   { return getHP() > 0; }
-const string& Human::getName() { return Name;		 }
-double Human::getHP()		   { return health;		 }
-void Human::getTeamName()	   { team->getName();	 }
-unsigned Human::getID()		   { return id;			 }
-Team *Human::getTeam()		   { return team;		 }
-void Human::battleLog()		   { /*  */ }
 
-void Human::setID(unsigned id_)
+Human::~Human()							{ delete weapon;		}
+const bool Human::isAlive()				{ return getHP() > 0;	}
+const std::string& Human::getName()		{ return Name;			}
+const double Human::getHP()				{ return health;		}
+void Human::getTeamName()				{ team->getName();		}
+const unsigned Human::getID()			{ return id;			}
+Team *Human::getTeam()					{ return team;			}
+void Human::battleLog()					{ /*...*/ }
+
+void Human::setID(const unsigned &id_)
 { 
 	id = id_; 
 }
@@ -27,7 +28,7 @@ void Human::dropWeapon()
 	}
 }
 
-Human::Human(string name, double from, double to, Team *team) : Name(name), health(100.0F)
+Human::Human(std::string name, double from, double to, Team *team) : Name(name), health(100.0F)
 {
 	++id;
 	std::uniform_real_distribution<> urd(from, to);
@@ -53,7 +54,7 @@ void Human::action(Human *unit)
 	if (hit(unit) == HitResult::Killed)
 	{
 		getTeamName();
-		cout << " " << getName() << " wins!" << endl;
+		std::cout << " " << getName() << " wins!" << std::endl;
 	}
 }
 
@@ -78,35 +79,35 @@ HitResult Human::hit(Human *unit)
 {
 	if (!isAlive() || !unit->isAlive())
 	{
-		cout << "Oops, you're dead already" << endl;
+		std::cout << "Oops, you're dead already" << std::endl;
 		return HitResult::Suicide;
 	}
 	if (!hasWeapon())
 	{
-		cout << "Oops, you don't have weapon, it would be nice to find her first!" << endl;
+		std::cout << "Oops, you don't have weapon, it would be nice to find her first!" << std::endl;
 		return HitResult::Incorrect;
 	}
 	double damageDone = unit->inflictDMG(this->getWeapon()->weaponDMG());
 	if (!unit->isAlive())
 	{
-		cout << fixed << setprecision(1);
+		std::cout << std::fixed << std::setprecision(1);
 		getTeamName();
-		cout << " " << getName() << getID() << " hurt " << this->getWeapon()->weaponDMG() << " DMG" << endl;
+		std::cout << " " << getName() << getID() << " hurt " << this->getWeapon()->weaponDMG() << " DMG" << std::endl;
 		unit->battleLog();
 		unit->getTeamName();
-		cout << " " << unit->getName() << " was killed!" << endl;
+		std::cout << " " << unit->getName() << " was killed!" << std::endl;
 		return HitResult::Killed;
 	}
 	if (damageDone <= 0)
 	{
-		cout << unit->getName() << " missed!" << endl;
+		std::cout << unit->getName() << " missed!" << std::endl;
 		return HitResult::Missed;
 	}
 	else
 	{
-		cout << fixed << setprecision(1);
+		std::cout << std::fixed << std::setprecision(1);
 		getTeamName();
-		cout << " " << getName() << getID() << " hurt " << this->getWeapon()->weaponDMG() << " DMG" << endl;
+		std::cout << " " << getName() << getID() << " hurt " << this->getWeapon()->weaponDMG() << " DMG" << std::endl;
 		unit->battleLog();
 		return HitResult::Wounded;
 	}
@@ -114,9 +115,9 @@ HitResult Human::hit(Human *unit)
 
 void Human::information()
 {
-	cout << fixed << setprecision(1);
-	cout << endl << "#" << getName() << getID() << endl;
-	cout << getHP() << "HP " << endl;
-	cout << "Weapon: ";
-	cout << (hasWeapon() ? "True - " : "False");
+	std::cout << std::fixed << std::setprecision(1);
+	std::cout << std::endl << "#" << getName() << getID() << std::endl;
+	std::cout << getHP() << "HP " << std::endl;
+	std::cout << "Weapon: ";
+	std::cout << (hasWeapon() ? "True - " : "False");
 }

@@ -1,5 +1,4 @@
-#ifndef __WARRIOR_H__
-#define __WARRIOR_H__
+#pragma once
 ///////////////////////////////////////////////////////////
 #include <iostream>
 #include <string>
@@ -8,9 +7,6 @@
 ///////////////////////////////////////////////////////////
 class Human;
 class Game;
-using std::string;
-using std::cout;
-using std::endl;
 ///////////////////////////////////////////////////////////
 class Warrior : public Human
 {
@@ -28,8 +24,6 @@ public:
 	void battleLog();
 	void initWeapon();
 	void action(Human *unit);
-	double getArmor();
-	double inflictDMG(double damage);
+	const double getArmor();
+	double inflictDMG(double &damage);
 };
-
-#endif // __WARRIOR_H__

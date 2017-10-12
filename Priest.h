@@ -1,12 +1,7 @@
-#ifndef __PRIEST_H__
-#define __PRIEST_H__
+#pragma once
 ///////////////////////////////////////////////////////////
 #include <iostream>
 #include <string>
-///////////////////////////////////////////////////////////
-using std::string;
-using std::cout;
-using std::endl;
 ///////////////////////////////////////////////////////////
 class Priest : public Human
 {
@@ -20,15 +15,13 @@ private:
 public:
 	Priest(Team *team);
 	~Priest();
-	double getHeal();
+	const double getHeal();
+	const double getMana();
 	HitResult healing(Human *unit);
 	void action(Human *unit);
 	void battleLog();
 	void initWeapon();
 	void information();
-	double getMana();
-	double skillCost(double _mana);
-	double inflictDMG(double damage);
+	double skillCost(const double &_mana);
+	double inflictDMG(const double &damage);
 };
-
-#endif // __PRIEST_H__

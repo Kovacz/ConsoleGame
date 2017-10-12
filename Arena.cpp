@@ -20,8 +20,8 @@ void Arena::arena_type(unsigned type)
 		blue = new Team("Blue", 1);
 		red  = new Team("Red",  1);
 
-		cout << endl << "It's a pvp between " << blue->getVec().at(0)->getName() << blue->getVec().at(0)->getID()
-			 << " and " << red->getVec().at(0)->getName() << red->getVec().at(0)->getID() << endl << endl;
+		std::cout << std::endl << "It's a pvp between " << blue->getVec().at(0)->getName() << blue->getVec().at(0)->getID()
+			 << " and " << red->getVec().at(0)->getName() << red->getVec().at(0)->getID() << std::endl << std::endl;
 		pvp(blue->getVec().at(0), red->getVec().at(0));
 	}
 	else if (type == 5)
@@ -34,7 +34,7 @@ void Arena::arena_type(unsigned type)
 	//}
 	else
 	{
-		cout << "Oops, something went wrong.." << endl;
+		std::cout << "Oops, something went wrong.." << std::endl;
 		exit(1);
 	}
 }
@@ -46,12 +46,12 @@ void Arena::pvp(Human *unit1, Human *unit2)
 		if (unit1->isAlive() && unit1->hasWeapon())
 		{
 			unit1->action(unit2);
-			cout << endl;
+			std::cout << std::endl;
 		}
 		if (unit2->isAlive() && unit2->hasWeapon())
 		{
 			unit2->action(unit1);
-			cout << endl;
+			std::cout << std::endl;
 		}
 	}
 
@@ -66,8 +66,8 @@ void Arena::arena_5x5()
 	blue = new Team("Blue", teamSize);
 	red  = new Team("Red", teamSize );
 
-	queue <Human *> qu;
-	vector<Human *> dead;
+	std::queue <Human *> qu;
+	std::vector<Human *> dead;
 
 	while ( i != teamSize )
 	{
@@ -107,9 +107,9 @@ void Arena::arena_5x5()
 			   ) 
 			{
 				fighter->action(best_enemy);
-				cout << "BEST ENEMY: " << endl;
+				std::cout << "BEST ENEMY: " << std::endl;
 				best_enemy->getTeamName();
-				cout << " " << best_enemy->getName() << best_enemy->getID() << " " << best_enemy->getHP() << endl;
+				std::cout << " " << best_enemy->getName() << best_enemy->getID() << " " << best_enemy->getHP() << std::endl;
 			} /* _if_ */	
 			if (!best_enemy->isAlive())
 			{
@@ -128,11 +128,11 @@ void Arena::arena_5x5()
 	red->whoWin();
 	blue->whoWin();
 
-	cout << "/////////////// Dead: " << dead.size() << " ///////////////";
+	std::cout << "/////////////// Dead: " << dead.size() << " ///////////////";
 	for ( auto i : dead )
 	{
-		cout << endl;
-		cout << "Team: ";
+		std::cout << std::endl;
+		std::cout << "Team: ";
 		i->getTeamName();
 		i->information();
 	}

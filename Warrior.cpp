@@ -9,7 +9,7 @@ Warrior::Warrior(Team *team) : Human("Warrior", 0, 0, team), armor(0.24F)
 	Human::setID(++war_id);
 }
 
-double Warrior::getArmor() { return armor; }
+const double Warrior::getArmor() { return armor; }
 
 void Warrior::action(Human *unit)
 {
@@ -32,12 +32,12 @@ void Warrior::initWeapon()
 void Warrior::battleLog()
 {
 	getTeamName();
-	cout << " " << getName() << getID() << " got " << keep << " DMG of " << getHP() + keep << " HP" << endl
-		 << "Left " << getHP() << " HP" << endl;
-	cout << "Absorbed: " << resist << " of " << keep << " DMG" << endl;
+	std::cout << " " << getName() << getID() << " got " << keep << " DMG of " << getHP() + keep << " HP" << std::endl
+		 << "Left " << getHP() << " HP" << std::endl;
+	std::cout << "Absorbed: " << resist << " of " << keep << " DMG" << std::endl;
 }
 
-double Warrior::inflictDMG(double damage)
+double Warrior::inflictDMG(double &damage)
 {
 	resist = damage * armor;
 	damage -= resist;
@@ -51,7 +51,7 @@ void Warrior::information()
 	Human::information();
 	if (hasWeapon())
 	{
-		cout << minVal << "/" << maxVal << " DMG";
+		std::cout << minVal << "/" << maxVal << " DMG";
 	}
-	cout << endl << getArmor() << " Armor, blocking " << getArmor() * 100 << "% damage" << endl;
+	std::cout << std::endl << getArmor() << " Armor, blocking " << getArmor() * 100 << "% damage" << std::endl;
 }
