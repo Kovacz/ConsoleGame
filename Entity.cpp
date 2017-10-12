@@ -18,31 +18,31 @@ const sf::FloatRect Entity::getRect()
 	return sf::FloatRect(x, y, (float)width, (float)height);
 }
 
-const float Entity::getFrame() 
+float Entity::getFrame() const
 {
 	return frame;
 }
 
-const float Entity::getSpeed()
+float Entity::getSpeed() const
 {
 	return speed;
 }
 
-const float Entity::getAngle()
+float Entity::getAngle() const
 {
 	return angle;
 }
-const unsigned Entity::getWidth()
+unsigned Entity::getWidth() const
 {
 	return width;
 }
 
-const unsigned Entity::getHeight()
+unsigned Entity::getHeight() const
 {
 	return height;
 }
 
-const bool Entity::getIsMove()
+bool Entity::getIsMove() const
 {
 	return isMove;
 }

@@ -6,11 +6,11 @@
 
 
 Human::~Human()							{ delete weapon;		}
-const bool Human::isAlive()				{ return getHP() > 0;	}
+bool Human::isAlive()		const		{ return getHP() > 0;	}
+double Human::getHP()		const		{ return health;		}
+void Human::getTeamName()	const		{ team->getName();		}
+unsigned Human::getID()		const		{ return id;			}
 const std::string& Human::getName()		{ return Name;			}
-const double Human::getHP()				{ return health;		}
-void Human::getTeamName()				{ team->getName();		}
-const unsigned Human::getID()			{ return id;			}
 Team *Human::getTeam()					{ return team;			}
 void Human::battleLog()					{ /*...*/ }
 

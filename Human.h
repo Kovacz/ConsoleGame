@@ -22,14 +22,14 @@ private:
 public:
 	Human(std::string name, double from, double to, Team *team);
 	~Human();
-	const bool isAlive();
-	const double getHP();
-	bool hasWeapon();
-	const unsigned getID();
-	void dropWeapon();
-	void getTeamName();
-	void setID(const unsigned &id_);
+	bool isAlive()		const;
+	double getHP()		const;
+	unsigned getID()	const;
+	void getTeamName()	const;
 	const std::string &getName();
+	bool hasWeapon();
+	void dropWeapon();
+	void setID(const unsigned &id_);
 	Team *getTeam();
 	Weapon *getWeapon();
 	HitResult hit(Human *unit);

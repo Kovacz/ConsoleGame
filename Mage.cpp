@@ -9,7 +9,10 @@ Mage::Mage(Team *team) : Human("Mage", 0, 0, team), mana(100.0F)
 	Human::setID(++mage_id);
 }
 
-double Mage::getMana() { return mana; }
+double Mage::getMana() const
+{ 
+	return mana; 
+}
 
 void Mage::action(Human *unit)
 {

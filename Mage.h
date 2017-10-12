@@ -17,7 +17,7 @@ public:
 	void initWeapon();
 	void battleLog();
 	void action(Human *unit);
-	double getMana();
+	double getMana() const;
 	double skillCost(double _mana);
 	double inflictDMG(double damage);
 };

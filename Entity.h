@@ -13,12 +13,12 @@ public:
 	Entity(sf::Image &image, float dx, float dy, int w, int h);
 	~Entity();
 	const sf::FloatRect getRect();
-	const float getFrame();
-	const float getSpeed();
-	const float getAngle();
-	const unsigned getWidth();
-	const unsigned getHeight();
-	const bool getIsMove();
+	float getFrame() const;
+	float getSpeed() const;
+	float getAngle() const;
+	unsigned getWidth() const;
+	unsigned getHeight() const;
+	bool getIsMove() const;
 	virtual void animation(float &time, sf::Vector2f &totalMovement, int scale) = 0;
 	virtual void interactionWithMap(const sf::Rect<float> &rect) = 0;
 };
